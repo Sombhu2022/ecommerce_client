@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+*::selection{
+    background: var(--violate);
+    color: var(--white);
+}
+
+:root{
+    --white:#FFFFFF; //use for white color 
+    --lightGray:#D1D5DB;
+    --lightGray2:#F3F4F6;
+    --darkRed:#7C2D12;
+    --lightRed:#DC2626;
+    --lightOrenge:#FFEDD5;
+    --darkGray:#D1D5DB;
+    --linearColor:linear-gradient(70deg,#D4FC79,#96E6A1) ;
+    --darkGreen:#166534;
+    --lightGreen:#16A34A;
+    --violate:#634C9F;
+}
