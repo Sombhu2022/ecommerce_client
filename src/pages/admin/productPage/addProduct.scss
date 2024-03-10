@@ -1,0 +1,110 @@
+.add_product_container{
+     width: 800px;
+     margin:10px auto;
+     padding: 10px;
+    //  border: solid 1px red;
+}
+
+.notify_container{
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    border :solid 1px var(--lightRed) ;
+    border-radius: 5px;
+    font-size: large;
+    color: var(--black);
+    background: var(--lightPink);
+}
+
+.form_container{
+    // border: solid 1px red;
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap:wrap-reverse;
+    gap: 10px;
+
+}
+.form{
+    width: 500px;
+    background: var(--lightGray2);
+    padding:10px 10px;
+    border-radius: 6px;
+    >input , >textarea{
+        width: 100%;
+        padding: 12px;
+        margin:10px 0;
+        border: solid 1px var(--darkGray);
+        border-radius:6px;
+        outline: none;
+        font-size: 16px;
+    }
+    input[type=file]{
+         background: var(--white);
+         &::-webkit-file-upload-button{
+            background: var(--lightGreen);
+            border: none;
+            color: var(--white);
+            padding: 10px;
+            border-radius: 4px;
+            cursor:pointer;
+         }
+    }
+    >button{
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 6px;
+        background: var(--lightGreen);
+        transition: all ease 0.3s;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover{
+          background: var(--darkGreen);
+        }
+        >svg{
+           margin-left: 5px;
+           height: 20px;
+           width: 30px;
+        }
+    }
+}
+.extra_info{
+    // margin-left: 20px;
+    border: solid 1px red;
+    width: 270px;
+    height:auto;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+button.image-gallery-icon{
+    // font-size: 14px;
+    padding: 0;
+}
+.image-gallery-right-nav , .image-gallery-left-nav{
+    display: none;
+} 
+.image-gallery-svg{
+    height: 60px;
+    width: 30px;
+
+}
+
+@media only screen and (max-width:860px) {
+    .add_product_container{
+        width:95vw;
+    }
+    .extra_info{
+        height:auto;
+        width: 100%;
+    }
+    .form{
+        width: 100%;
+    }
+}

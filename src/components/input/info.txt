@@ -1,0 +1,23 @@
+1. how to perfom onChange event in inputfile ?
+
+ example --->
+
+ const [name , setName] = useState("")
+  
+ const inputHandle =(name , value)=>{
+      setName(value)
+ } 
+ 
+ <Input type={"name"} placeholder={"name"} name={"name"} onInputChange={inputHandle}/>
+
+
+or-->
+
+ <Input type={"name"} placeholder={"name"} name={"name"} onInputChange={(e)=>setName(e.target.value)}/>
+
+
+2. if any style change ?
+
+->   then do not change input.scss file 
+
+->  change on input style using Input component in your scss file .

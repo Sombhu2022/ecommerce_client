@@ -1,0 +1,44 @@
+.legend_container{
+	height: 50px ;
+	width: 300px;
+	border-radius: 10px;
+	border:solid 1px #008894;
+	// padding: 5px 0;
+	&:hover .legend {
+		margin-left: 8px;
+		margin-top: -12px;
+		
+		// position: relative;
+	}
+	
+	>legend{
+		// width: 70px;
+		margin-top: 12px;
+		margin-left: 20px;
+		position: absolute;
+		
+		padding:0 10px ;
+		color: #008894;
+		border-radius: 20px;
+		font-size: 18px;
+		transition: all ease 0.3s;
+		// border: solid 1px green;
+		background: #FFFFFF;
+		// color: #EBEBEB;
+	}
+	>input{
+		width: 100%;
+		height: 100%;
+		background: transparent;
+		outline: none;
+		border: none;
+		padding:0  20px;
+		font-size: 17px;
+		overflow: hidden;
+		border-radius: 10px;
+		&::placeholder{
+			color: #008894;
+		}
+		
+	}
+}
