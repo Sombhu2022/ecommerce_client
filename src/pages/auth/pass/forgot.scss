@@ -1,0 +1,10 @@
+div div.forgot_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    > form{
+      
+        padding-top: 100px;
+     }
+}
