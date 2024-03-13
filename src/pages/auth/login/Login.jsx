@@ -2,25 +2,20 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import './login.scss'
 
+import { useDispatch } from 'react-redux';
+import { logInUser } from '../../../redux/user/userController';
+
+
 function Login() {
 	const [email, setEmail] = useState();
 	const [password , setPassword]=useState();
+    
+	const dispatch = useDispatch()
+
 
 	const submitHandle=async(e)=>{
 		e.preventDefault();
-		try {
-			
-			const user = await axios.post("http://localhost:8080/user/login" , {email , password},{
-				headers:{
-					"Content-Type":"application/json"
-				},
-				withCredentials:true
-			})
-			
-			console.log(user);
-		} catch (error) {
-			console.log(error);
-		}
+		dispatch(logInUser({email , password}))
       
 	}
 

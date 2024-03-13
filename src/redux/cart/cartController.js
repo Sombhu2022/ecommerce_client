@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
 
-export const addProduct = createAsyncThunk( "cart/allProduct" , async(data)=>{
+export const addCard = createAsyncThunk( "cart/allCard" , async(data)=>{
 
     console.log(data)
     return data
