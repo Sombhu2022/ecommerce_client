@@ -5,6 +5,9 @@ import PhotoViewer from 'photoviewer'
 import ImageGallery from 'react-image-gallery'
 import "react-image-gallery/styles/scss/image-gallery.scss";
 
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../../redux/product/productController";
+
 import axios from 'axios'
 
 function AddProduct() {
@@ -17,7 +20,7 @@ function AddProduct() {
 	const [stock, setStock] = useState("");
   const [discount , setDiscount] = useState(0)
   const [brand ,setBrand] = useState("")
-	
+	const dispatch = useDispatch()
 
   const fileHandle=(e)=>{
     const files = Array.from(e.target.files)
@@ -34,20 +37,13 @@ function AddProduct() {
 				}
 			};
 			reader.readAsDataURL(file);
-
 		});
-
-    // imagePreview.forEach(ele=>{
-
-    // })
-
   }
 
-  const handleSubmit =async(e)=>{
+  const handleSubmit =(e)=>{
     e.preventDefault();
-    console.log( imagePreview);
     const myForm =new FormData();
-    
+
     myForm.set("name", name);
 		myForm.set("price", price);
 		myForm.set("description", description);
@@ -60,18 +56,9 @@ function AddProduct() {
        myForm.append("images" , image)
     })
    
-    console.log(myForm);
-  try {
-     const data =await axios.post("http://localhost:8080/product/" , myForm , {
-      headers:{"Content-Type":"multipart/form-data" ,},
-      withCredentials:true
-     },
-     )
-     console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-  
+    console.log( "this is my form",myForm);
+
+    dispatch(addProduct(myForm))  
   }
 
   return (

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {  addProduct } from "./cartController";
+import {  addCard } from "./cartController";
 
 
 const initialState ={
@@ -20,16 +20,16 @@ export const cartSlice = createSlice({
     extraReducers:(builder)=>{
 
         builder
-        .addCase( addProduct.pending ,(state , action)=>{
+        .addCase( addCard.pending ,(state , action)=>{
             state.status ="panding";
         })
-        .addCase(addProduct.fulfilled , (state , action )=>{
+        .addCase(addCard.fulfilled , (state , action )=>{
             state.product.push(action.payload) 
             console.log(action.payload.data);
             state.status = "add product"
             state.error = false
         })
-        .addCase(addProduct.rejected , (state , action )=>{
+        .addCase(addCard.rejected , (state , action )=>{
             
             state.status = "product not add"
             state.error = true

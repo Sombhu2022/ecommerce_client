@@ -2,7 +2,7 @@ import React from "react";
 import pumpkin from "./pumpkin.png";
 import { IoHeart } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../../../redux/cart/cartController";
+import { addCard } from "../../../redux/cart/cartController";
 import { TiShoppingCart } from "react-icons/ti";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { Rate } from "antd";
@@ -21,7 +21,7 @@ function ProductComponent({ name, price, reting, discount }) {
       reting: reting,
       discount: discount,
     };
-    dispatch(addProduct(data));
+    dispatch(addCard(data));
   };
 
   console.log(state);
