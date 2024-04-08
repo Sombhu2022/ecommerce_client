@@ -10,21 +10,20 @@ import { Rate } from "antd";
 import "./productComponent.scss";
 import { Link } from "react-router-dom";
 
-function ProductComponent({ name, price, reting, discount }) {
+function ProductComponent({ id , thumbnail ,  name, price, reting, discount }) {
+
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const { user } = useSelector(state=>state.user)
 
   const cardHandle = async () => {
     const data = {
-      name: name,
-      price: price,
-      reting: reting,
-      discount: discount,
+      productQuantity:1,
+      product:id
     };
     dispatch(addCard(data));
   };
 
-  console.log(state);
+
   return (
     <div className="product">
       <div className="dicount_container">
@@ -33,16 +32,16 @@ function ProductComponent({ name, price, reting, discount }) {
       </div>
 
       <div className="image_container">
-        <img className="product_image" src={pumpkin} alt="" />
+        <img className="product_image" src={thumbnail.url} alt="" />
       </div>
 
       <div className="product_info">
         <p className="product_name"> {name}</p>
         {/* <p className='description'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum veniam quidem dignissimos.</p> */}
-        <p className="ratting">
+        {/* <p className="ratting">
           <p> {reting}</p>
           <Rate count={5} value={4} allowHalf disabled />
-        </p>
+        </p> */}
         <span className="ammount_of_product"> 250 g </span>
         <p className="prise">
           <BsCurrencyRupee/> {price} <del><BsCurrencyRupee/> 200</del>
@@ -54,9 +53,9 @@ function ProductComponent({ name, price, reting, discount }) {
           </button>
           </Link>
 
-          <Link>
+          {/* <Link>
            <button className="buy_button"><BsCurrencyRupee/> Buy</button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

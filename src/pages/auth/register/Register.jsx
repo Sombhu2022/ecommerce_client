@@ -39,18 +39,13 @@ function Register() {
     data.set("password", password);
 
     dispatch(createUser(data));
-
-    const date = moment(state.user.createAt).format('MMM DD, YYYY, h:mm:ss A [GMT]');
-
-    console.log(date);
-
-    // const user = await axios.post("http://localhost:8080/user/register" , data ,{
-    // 	headers:{
-    // 		"Content-Type":"multipart/form-data"
-    // 	},
-    // 	withCredentials:true
-    // })
-    // console.log(user);
+  //   const user = await axios.post("http://localhost:8080/user/register" , data ,{
+  //   	headers:{
+  //   		"Content-Type":"multipart/form-data"
+  //   	},
+  //   	withCredentials:true
+  //   })
+  //   console.log(user);
   };
 
   return (
@@ -96,7 +91,7 @@ function Register() {
       </form>
       {state.status ==="pending" ? <div>loading</div> : ""}
       {
-        state.user.createAt ? (<h1>{date}</h1>):""
+        state.user.createAt ? (<h1>ok</h1>):""
       }
     </div>
   );

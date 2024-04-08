@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 import { GoArrowRight } from "react-icons/go";
 import { FaCartShopping } from "react-icons/fa6";
 import ProductComponent from "./components/ProductComponent";
+import {useSelector } from 'react-redux'
 
 function Product() {
+  const { product } =  useSelector((state)=> state.product)
+
   return (
     <div className="product_page">
       
@@ -19,12 +22,17 @@ function Product() {
           </p>
           <Link>
             <button>
-              {" "}
+             
               <p>Shop Now</p> <GoArrowRight />
             </button>
           </Link>
         </div>
       </div>
+
+
+     <div>
+
+     </div>
 
       <div className="total_info">
         <p> Showing all 16 Result </p>
@@ -35,13 +43,20 @@ function Product() {
       </div>
 
       <div className="product_container"> 
-         <ProductComponent price={100} name={"pumpkin .. mujhe thik se nehi pata"} discount={40} reting={3.8}/>
-         <ProductComponent price={100} name={"pumpkin .. mujhe thik se nehi pata"} discount={40} reting={3.8}/>
-         <ProductComponent price={100} name={"pumpkin .. mujhe thik se nehi pata"} discount={40} reting={3.8}/>
-         <ProductComponent price={100} name={"pumpkin .. mujhe thik se nehi pata"} discount={40} reting={3.8}/>
-         <ProductComponent price={100} name={"pumpkin .. mujhe thik se nehi pata"} discount={40} reting={3.8}/>
-         <ProductComponent price={100} name={"pumpkin .. mujhe thik se nehi pata"} discount={40} reting={3.8}/>
+      {
+          product?.map((ele , index)=>{
+             return(
+              <Link className="link" key={index} to={`/product/${ele._id}`}>
+                <ProductComponent id={ele._id} thumbnail={ele.images[0]} price={ele.price} name={ele.name} discount={ele.discount}/>
+              </Link>
+             )
+          })
+        }
+        
          
+      </div>
+      <div>
+        
       </div>
     </div>
   );
