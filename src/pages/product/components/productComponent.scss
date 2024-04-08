@@ -1,3 +1,7 @@
+.link{
+  text-decoration: none;
+  color: black;
+}
 .product {
   height: auto;
   width: 200px;
@@ -89,7 +93,7 @@
 }
 .product_name {
   margin: 5px 0;
-  font-weight: 600;
+
 }
 .ammount_of_product {
   margin: 3px 0;

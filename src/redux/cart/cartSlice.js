@@ -4,7 +4,6 @@ import {  addCard } from "./cartController";
 
 const initialState ={
     product:[],
-    user:{},
     isAuthentication: false ,
     status:false,
     error:null
@@ -25,13 +24,13 @@ export const cartSlice = createSlice({
         })
         .addCase(addCard.fulfilled , (state , action )=>{
             state.product.push(action.payload) 
-            console.log(action.payload.data);
-            state.status = "add product"
+            console.log(action.payload.product);
+            state.status = "success"
             state.error = false
         })
         .addCase(addCard.rejected , (state , action )=>{
             
-            state.status = "product not add"
+            state.status = "rejected"
             state.error = true
         })
         
