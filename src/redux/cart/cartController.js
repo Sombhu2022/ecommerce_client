@@ -4,9 +4,9 @@ import { baseUrl } from "../../App";
 
 
 
-export const addCard = createAsyncThunk( "cart/addCard" , async({  productQuantity , product})=>{
-    console.log({productQuantity , product});
-    const {data} = await API.post(`${baseUrl}/card`, {productQuantity , product} ,  {
+export const addCard = createAsyncThunk( "cart/addCard" , async({ productId , price })=>{
+    console.log({ productId , price});
+    const {data} = await API.post(`${baseUrl}/card`, { productId , price} ,  {
         headers: { "Content-Type": "multipart/form-data", },
         withCredentials: true
     })

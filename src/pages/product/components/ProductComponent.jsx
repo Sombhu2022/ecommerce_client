@@ -5,20 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCard } from "../../../redux/cart/cartController";
 import { TiShoppingCart } from "react-icons/ti";
 import { BsCurrencyRupee } from "react-icons/bs";
-import { Rate } from "antd";
 
 import "./productComponent.scss";
 import { Link } from "react-router-dom";
 
-function ProductComponent({ id , thumbnail ,  name, price, reting, discount }) {
+function ProductComponent({ id , thumbnail ,  name, price, actualPrice ,reting, discount }) {
 
   const dispatch = useDispatch();
   const { user } = useSelector(state=>state.user)
 
   const cardHandle = async () => {
     const data = {
-      productQuantity:1,
-      product:id
+      productId:id ,
+      price:actualPrice
     };
     dispatch(addCard(data));
   };
@@ -37,25 +36,19 @@ function ProductComponent({ id , thumbnail ,  name, price, reting, discount }) {
 
       <div className="product_info">
         <p className="product_name"> {name}</p>
-        {/* <p className='description'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum veniam quidem dignissimos.</p> */}
-        {/* <p className="ratting">
-          <p> {reting}</p>
-          <Rate count={5} value={4} allowHalf disabled />
-        </p> */}
+        
         <span className="ammount_of_product"> 250 g </span>
         <p className="prise">
-          <BsCurrencyRupee/> {price} <del><BsCurrencyRupee/> 200</del>
+          <BsCurrencyRupee/> {actualPrice} <del> {price} </del>
         </p>
         <div className="buttons">
-          <Link>
+          <Link to={'/cart'}>
           <button className="cart_button" onClick={cardHandle}>
-           <TiShoppingCart/>  Cart
+            <TiShoppingCart/>  Cart
           </button>
           </Link>
 
-          {/* <Link>
-           <button className="buy_button"><BsCurrencyRupee/> Buy</button>
-          </Link> */}
+  
         </div>
       </div>
     </div>

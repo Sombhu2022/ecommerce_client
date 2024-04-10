@@ -42,6 +42,9 @@ function AddProduct() {
 
   const handleSubmit =(e)=>{
     e.preventDefault();
+    const discountAmmount = (price * discount )/ 100;
+    const actualPrice = price - discountAmmount
+    console.log(actualPrice);
     const myForm =new FormData();
 
     myForm.set("name", name);
@@ -51,6 +54,7 @@ function AddProduct() {
 		myForm.set("stock", stock);
     myForm.set("discount", discount)
     myForm.set("brand" , brand)
+    myForm.set("actualPrice" , actualPrice)
 
     images.forEach((image)=>{
        myForm.append("images" , image)
@@ -121,7 +125,7 @@ function AddProduct() {
             name="descreption"
             id=""
             placeholder="Product Descreption"
-            onChange={(e)=>setDescription(e.target.value)}
+            onChange={(e)=> setDescription(e.target.value)}
           />
 
           <button type="submit" onClick={handleSubmit}>

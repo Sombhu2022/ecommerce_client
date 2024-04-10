@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./product.scss";
 
 import { Link } from "react-router-dom";
@@ -8,7 +8,14 @@ import ProductComponent from "./components/ProductComponent";
 import {useSelector } from 'react-redux'
 
 function Product() {
-  const { product } =  useSelector((state)=> state.product)
+  const { product , status} =  useSelector((state)=> state.product)
+  const [products , setProducts] = useState([])
+
+  useEffect(()=>{
+    if(status === 'success'){
+      setProducts(product)
+    }
+  },[ product ])
 
   return (
     <div className="product_page">
@@ -20,9 +27,8 @@ function Product() {
           <p className="extra_information">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, ut!
           </p>
-          <Link>
+          <Link to={'/'}>
             <button>
-             
               <p>Shop Now</p> <GoArrowRight />
             </button>
           </Link>
@@ -44,10 +50,10 @@ function Product() {
 
       <div className="product_container"> 
       {
-          product?.map((ele , index)=>{
+        product &&  product?.map((ele , index)=>{
              return(
-              <Link className="link" key={index} to={`/product/${ele._id}`}>
-                <ProductComponent id={ele._id} thumbnail={ele.images[0]} price={ele.price} name={ele.name} discount={ele.discount}/>
+              <Link className="link" key={ele._id} to={`/product/${ele._id}`}>
+                <ProductComponent id={ele._id} thumbnail={ele.images[0]} price={ele.price} actualPrice={ele.actualPrice} name={ele.name} discount={ele.discount}/>
               </Link>
              )
           })
