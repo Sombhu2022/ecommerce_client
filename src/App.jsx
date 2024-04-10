@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { authUser } from "./redux/user/userController";
 import { allProduct } from "./redux/product/productController";
 import ProductDetails from "./pages/product/components/product details/ProductDetails";
+import Cart from "./pages/Cart/Cart";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route index element={<Product/>}  />
           <Route path="/add" element={<AddProduct/>}  />
           <Route path="/product/:id" element={<ProductDetails/>}/>
+          <Route path="/cart"  element={<Cart/>}/>
           </Route>
 
           <Route path="/register" element={<Register/>}/>

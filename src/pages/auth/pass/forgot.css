@@ -1,0 +1,8 @@
+div div.forgot_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+div div.forgot_container > form {
+  padding-top: 100px;
+}/*# sourceMappingURL=forgot.css.map */

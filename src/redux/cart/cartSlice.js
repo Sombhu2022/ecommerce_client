@@ -23,8 +23,7 @@ export const cartSlice = createSlice({
             state.status ="panding";
         })
         .addCase(addCard.fulfilled , (state , action )=>{
-            state.product.push(action.payload) 
-            console.log(action.payload.product);
+            state.product = action.payload.product
             state.status = "success"
             state.error = false
         })
