@@ -1,0 +1,95 @@
+.all_cart{
+    // border: solid 1px red;
+    
+   >.cart{
+     border: solid 1px var(--lightGray);
+     border-radius: 10px;
+     background: var(--lightGray2);
+     margin: 10px auto;
+     padding: 10px;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 10px;
+     max-width: 600px;
+     justify-content: space-evenly;
+     >.product_image{
+        height: 150px;
+        width: 150px;
+        >img{
+            border-radius: 5px;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+     }
+     >.product_details{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        >.name{
+            >p{
+                font-size: 20px;
+                color: var(--black);
+            }
+            >.id{
+                font-size: 14px;
+                color: var(--darkGray2);
+            }
+        }
+     }
+    }
+}
+
+.button{
+
+     >div{
+         
+         >button{
+             padding: 5px 10px;
+             border: solid 1px var(--lightRed);
+             border-radius: 3px;
+             background: var(--lightPink);
+             cursor: pointer;
+             font-size: 20px;
+             
+            }
+            >span{
+                padding: 0 5px;
+                font-size: 20px;
+            }
+        }
+}
+
+.price {
+    border-top: solid 2px var(--lightGray);
+      max-width: 600px;
+      padding: 10px ;
+      margin: 20px auto;
+      
+}
+.delivary_cost{
+    max-width: 600px;
+    padding: 10px ;
+    margin: 10px auto;
+    border: solid 1px var(--lightGreen);
+    background: var(--lightGreen2);
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    gap: 10px;
+    // justify-content: center;
+    align-items: center;
+}
+.total_price{
+    display: flex;
+    justify-content: space-between;
+    border-top: solid 2px var(--lightGray);
+    max-width: 600px;
+    padding: 10px ;
+    margin: 20px auto;
+    >.price{
+        border: none;
+        margin: 0;
+    }
+}
