@@ -50,8 +50,8 @@ const ProductDetails = () => {
   }
 
   const data = {
-    productQuantity:1,
-    product:thisProduct._id
+    productId:thisProduct._id,
+    price:thisProduct.actualPrice,
   };
 
   const addToCart =()=>{

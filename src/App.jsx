@@ -6,6 +6,7 @@ import Register from "./pages/auth/register/Register";
 import Login from "./pages/auth/login/Login";
 import InputTest from "./components/InputTest";
 import Layout from "./components/layout/Layout";
+import CartPage from "./pages/Cart/CartPage";
 
 
 import { useDispatch } from "react-redux";
@@ -13,7 +14,8 @@ import { useSelector } from "react-redux";
 import { authUser } from "./redux/user/userController";
 import { allProduct } from "./redux/product/productController";
 import ProductDetails from "./pages/product/components/product details/ProductDetails";
-import Cart from "./pages/Cart/Cart";
+import Order from "./pages/Order/Order";
+
 
 function App() {
 
@@ -32,12 +34,14 @@ function App() {
           <Route index element={<Product/>}  />
           <Route path="/add" element={<AddProduct/>}  />
           <Route path="/product/:id" element={<ProductDetails/>}/>
-          <Route path="/cart"  element={<Cart/>}/>
+          <Route path="/cart"  element={<CartPage/>}/>
+          <Route path="/order" element={<Order/>}/>
           </Route>
 
           <Route path="/register" element={<Register/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/input" element={<InputTest/>}/>
+
         </Routes>
       </Router>
     </>

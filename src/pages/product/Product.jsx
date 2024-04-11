@@ -50,10 +50,10 @@ function Product() {
 
       <div className="product_container"> 
       {
-        product &&  product?.map((ele , index)=>{
+        products?.map((ele , index)=>{
              return(
               <Link className="link" key={ele._id} to={`/product/${ele._id}`}>
-                <ProductComponent id={ele._id} thumbnail={ele.images[0]} price={ele.price} actualPrice={ele.actualPrice} name={ele.name} discount={ele.discount}/>
+                <ProductComponent id={ele._id} thumbnail={ele?.images[0]} price={ele.price} actualPrice={ele.actualPrice} name={ele.name} discount={ele.discount}/>
               </Link>
              )
           })
