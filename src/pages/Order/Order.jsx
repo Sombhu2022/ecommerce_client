@@ -3,7 +3,7 @@ import axios from 'axios'
 import API from '../../utils/axiosSetup';
 import { baseUrl } from '../../App';
 // import fatch from 'fs'
-const api_key = "AIzaSyCYHwYUFrN0Mf3iMWvQdjqApC7W054QC-o"
+
 
 
 function Order() {
