@@ -15,6 +15,7 @@ import { authUser } from "./redux/user/userController";
 import { allProduct } from "./redux/product/productController";
 import ProductDetails from "./pages/product/components/product details/ProductDetails";
 import Order from "./pages/Order/Order";
+import { getCart } from "./redux/cart/cartController";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   useEffect(()=>{
     dispatch(authUser());
     dispatch(allProduct());
+    dispatch(getCart())
   } , [])
 
   return (

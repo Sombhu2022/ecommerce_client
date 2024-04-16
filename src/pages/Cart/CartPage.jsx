@@ -8,10 +8,13 @@ import './cart.scss'
 import { BsCurrencyRupee } from "react-icons/bs";
 import { FaCartShopping } from "react-icons/fa6";
 import { HiMiniCurrencyRupee } from "react-icons/hi2";
+import { useNavigate } from 'react-router-dom';
 
 function CartPage() {
   const [products , setProducts] = useState([])
   const [delivaryFees , setDelivaryFees ] =useState(0)
+
+  const navigate = useNavigate()
 
    const  {product , status } = useSelector((state)=>state.cart)
    const dispatch = useDispatch()
@@ -48,7 +51,7 @@ function CartPage() {
 
         <div className='price_container'>
 
-        <div className='price'>{
+        <div className='price price2'>{
             products?(<> <span style={{color:'black'}}> Total Product Cost :- </span><BsCurrencyRupee/>  {products.totalAmmount}</>):""
         }
      
@@ -63,7 +66,9 @@ function CartPage() {
             products?(<div className='price'> <span style={{color:'black'}}> Total Cost :- </span><BsCurrencyRupee/>  {products.totalAmmount + delivaryFees}</div>):""
         }
          <div className="button">  
-          <button className="bye"> <HiMiniCurrencyRupee/> Order Now </button>
+          <button className="bye" onClick={()=>{
+            navigate('/order')
+          }}> <HiMiniCurrencyRupee/> Order Now </button>
         </div>
         </div>
         </div>
