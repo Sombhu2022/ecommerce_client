@@ -14,7 +14,6 @@
     "antd": "^5.14.1",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
-    "current-location-geo": "^1.1.5",
     "moment": "^2.30.1",
     "photoviewer": "^3.9.2",
     "react": "^18.2.0",

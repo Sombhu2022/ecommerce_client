@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*::-moz-selection {
+  background: var(--violate);
+  color: var(--white);
+}
+
+*::selection {
+  background: var(--violate);
+  color: var(--white);
+}
+
+:root {
+  --orange:orange;
+  --white:#FFFFFF;
+  --black:#000000;
+  --lightGray:#D1D5DB;
+  --lightGray2:#F3F4F6;
+  --darkRed:#7C2D12;
+  --lightRed:#DC2626;
+  --lightPink:#FFF5F5;
+  --lightOrenge:#FFEDD5;
+  --lightOrenge2:rgba(237, 179, 71, 0.212);
+  --darkGray:#D1D5DB;
+  --darkGray2:rgba(128, 128, 128, 0.959);
+  --linearColor:linear-gradient(70deg,#D4FC79,#96E6A1) ;
+  --darkGreen:#166534;
+  --lightGreen:#16A34A;
+  --lightGreen2:#60f96049;
+  --violate:#634C9F;
+  --darkBackgroung:#1E1E1E;
+}
+/*# sourceMappingURL=global.css.map */

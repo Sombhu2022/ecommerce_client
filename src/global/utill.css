@@ -1,0 +1,63 @@
+.form {
+  width: 500px;
+  background: var(--lightGray2);
+  padding: 10px 10px;
+  border-radius: 6px;
+}
+
+.form > input, .form > textarea, .form > select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: solid 1px var(--darkGray);
+  border-radius: 6px;
+  outline: none;
+  font-size: 16px;
+}
+
+.form input[type=file] {
+  background: var(--white);
+}
+
+.form input[type=file]::-webkit-file-upload-button {
+  background: var(--lightGreen);
+  border: none;
+  color: var(--white);
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form > button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  background: var(--lightGreen);
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.form > button:hover {
+  background: var(--darkGreen);
+}
+
+.form > button > svg {
+  margin-left: 5px;
+  height: 20px;
+  width: 30px;
+}
+/*# sourceMappingURL=utill.css.map */
