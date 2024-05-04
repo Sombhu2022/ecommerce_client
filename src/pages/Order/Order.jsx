@@ -6,8 +6,6 @@ import { baseUrl } from '../../App';
 
 import './order.scss'
 
-import { getLocation } from 'current-location-geo';
-
 import { MdMyLocation } from "react-icons/md";
 import { useSelector } from 'react-redux';
 
@@ -21,48 +19,48 @@ function Order() {
   const [pincode , setPincode] = useState("")
   const [ isCurrent , setIsCurrent]=useState(false)
   const [isLoading , setIsLoading] = useState(false)
-  const [products , setProducts] = useState([])
+  const [productList , setProductList] = useState([])
   const [totalAmmount , setTotalAmmount]=useState()
   const [delivaryFees , setDelivaryFees] = useState(0)
   
   const [email , setEmail]= useState("")
   const [phone , setPhone]=useState('')
   const [paymentType , setPaymentType] = useState("online")
-  const { product , status } = useSelector((state)=>state.cart)
 
-  useEffect(()=>{
-    
-    setProducts(product.cart)
+  const [isAddLoc , setIsAddLoc] = useState(false)
+
+  const { product , status } = useSelector((state)=>state.cart)
+  const { user } = useSelector((state)=>state.user)
+
+console.log(paymentType);
+console.log(productList);
+console.log(user);
+
+  useEffect(()=>{  
+    setProductList(product.cart)
     setTotalAmmount(product.totalAmmount)
     if(product.totalAmmount < 500){
       setDelivaryFees(50)
     }
-  } , [status])
+  } , [])
   
   
-console.log( products);
+console.log( productList);
 
   const getCurrentLocation =async (e)=>{
      e.preventDefault();
-     setIsLoading(true)
-     getLocation((err, position)=>{
-      if (err) {
-        console.error('Error:', err);
-        setIsCurrent(false)
-      } else {
-        setAddress(position.address)
-        setCoordinets([position.latitude , position.longitude ])
-        let arr = position.address.split(',')
-        console.log(arr[arr.length - 2]);
-        setPincode(arr[arr.length - 2])
-
-        console.log('COORD:', coordinets);
-        console.log('Address:', address);
-        console.log("pin code : " , pincode);
-        setIsCurrent(true)
-        setIsLoading(false)
-      }
-    });
+     try {
+       setIsLoading(true)
+       navigator.geolocation.getCurrentPosition((data)=>{
+           console.log(data);
+      } , (error)=>{
+        console.log(error);
+      })
+      
+    } catch (error) {
+       setIsLoading(false)
+        console.log(error);
+     }
 
       
   }
@@ -73,17 +71,17 @@ console.log( products);
   //     `${ele.product._id},
   //     ${ele.product.name},
   //     ${ele.productQuantity},
-  //     ${ele.totalPrice}.`
+  //     ${ele.totalPrice}`
   
   //   )
 
   // })
 
   
-
   const handleSubmit =async(e)=>{
     e.preventDefault();
-   
+    
+    try {
     const formData = {
       email,
       phone,
@@ -97,22 +95,65 @@ console.log( products);
       paymentType
     }
 
-   try {
-        const {data} =await API.post(`${baseUrl}/order`,formData, {
-          headers: { "Content-Type": "multipart/form-data", },
+        const {data}=await API.post(`${baseUrl}/order`,{ ...formData}, {
+          headers: { "Content-Type": "application/json", },
           withCredentials: true
       })
-        console.log(data);
+      console.log(data.order.id , data.key , data.order , data?.data?._id)
+
+      console.log(window);
+
+      const options = {
+        key : data.key ,
+        amount: data.order.amount,
+        currency: "INR",
+        name: "Apna Bazar",
+        description: "Build your healthy Life",
+        image: "https://www.pngall.com/wp-content/uploads/8/Market-PNG-Image.png",
+        order_id: data.order.id,
+        callback_url:`${baseUrl}/order/pay/${data?.data?._id}`,
+        prefill: {
+            name: user.name,
+            email: user.email,
+            contact: "7047808326"
+        },
+        notes: {
+            "address": "Razorpay Corporate Office"
+        },
+    };
+     
+      const razor = new window.Razorpay(options);
+      razor.open();
+   
+
       } catch (error) {
         console.log(error);
       }
-  }
 
+     
+}
+
+
+      // try {
+        
+      //   const {data } =await API.post(`${baseUrl}/order/pay`,{
+      //     totalAmmount
+      //   }, {
+      //     headers: { "Content-Type": "application/json", },
+      //     withCredentials: true
+      // })
+      // console.log(data);
+      // } catch (error) {
+      //    console.log(error);
+      // }
+  
   return (
     <div>
       <h2>
         Order Your Products 
       </h2>
+
+      { isAddLoc?(
       <div className="form_container2">
         <form action="" className="form" >
 
@@ -122,7 +163,7 @@ console.log( products);
             id=""
             placeholder='Enter your Email'
             value={email}
-            onChange={(e)=>setEmail(e.target.value)}
+            onChange={(e)=>{setEmail(e.target.value);}}
           />
           <input
             type="number"
@@ -152,6 +193,7 @@ console.log( products);
             onChange={(e)=>setState(e.target.value)}
           />
           </div>
+
           <div className="pin-and-payment">
           <input
             type="text"
@@ -170,6 +212,7 @@ console.log( products);
             onChange={(e)=>setCuntry(e.target.value)}
           />
           </div>
+
           <div className="pin-and-payment">
           <input
             type="text"
@@ -179,7 +222,7 @@ console.log( products);
             value={pincode}
             onChange={(e)=>setPincode(e.target.value)}
           />
-           <select name="" id="" value={paymentType} onChange={(e)=>setPaymentType(e.target.value)} >
+          <select name="" id="" value={paymentType} onChange={(e)=>setPaymentType(e.target.value)} >
           <option value="online"> Online Payment</option>
           <option value="offline"> Cesh On Delivary </option>
          </select>
@@ -195,7 +238,11 @@ console.log( products);
          <button onClick={getCurrentLocation}> <MdMyLocation/> {isLoading? "loading....":"Use Current Location" }  </button>
         </div>
         </form>
-      </div>
+      </div>):""
+      }
+
+     <button onClick={()=>setIsAddLoc(!isAddLoc)}> { isAddLoc? "Hide Form":"Add Location"} </button>
+  
     </div>
   )
 }

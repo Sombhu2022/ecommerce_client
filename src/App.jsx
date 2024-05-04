@@ -16,6 +16,7 @@ import { allProduct } from "./redux/product/productController";
 import ProductDetails from "./pages/product/components/product details/ProductDetails";
 import Order from "./pages/Order/Order";
 import { getCart } from "./redux/cart/cartController";
+import Payment from "./pages/Order/Payment";
 
 
 function App() {
@@ -38,6 +39,10 @@ function App() {
           <Route path="/product/:id" element={<ProductDetails/>}/>
           <Route path="/cart"  element={<CartPage/>}/>
           <Route path="/order" element={<Order/>}/>
+          <Route path="/success/:id" element={<h1>payment success</h1>}/>
+          <Route path="/faild" element={<h1>not pay</h1>}/>
+          <Route path="/payment" element={<Payment/>}/>
+
           </Route>
 
           <Route path="/register" element={<Register/>}/>

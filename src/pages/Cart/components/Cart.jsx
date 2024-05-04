@@ -22,12 +22,16 @@ function Cart({ product , totalPrice , quantity}) {
         <p className='id'>{product._id}</p>
       </div>
       <div className='button'>
+        {
+          
+        }
         <div>
           <button onClick={()=>handleQuantity('+')}> + </button>
           <span> {quantity}</span>
           <button onClick={()=>handleQuantity('-')}> - </button>
         </div>
       </div>
+
       <div className='price'>
       <BsCurrencyRupee/>  {totalPrice}
         </div>
