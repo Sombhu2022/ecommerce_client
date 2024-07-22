@@ -21,17 +21,18 @@
   justify-content: space-between;
   padding: 5px 0;
 
-  > a {
-    text-decoration: none;
+
     button {
       font-size: 16px;
       padding: 5px 15px;
-      background: var(--lightGreen);
-      border: none;
+      border: solid 1px var(--lightGreen) ;
+      background:rgba(12, 194, 12, 0.26) ;
+      
       border-radius: 5px;
       font-weight: 500;
       // font-size: 20px;
-      color: whitesmoke;
+      // color: whitesmoke;
+
       display: flex;
       align-items: center;
       > svg {
@@ -41,9 +42,10 @@
       }
     }
   }
-  .cart_button {
-    background: var(--lightRed);
-  }
+ 
+.out_of_stock{
+  border: solid 1px var(--lightRed) !important;
+  background: var(--lightPink) !important;
 }
 
 .dicount_container {

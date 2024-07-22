@@ -3,13 +3,15 @@
   margin: 10px auto;
 }
 .banner_container{
+  // display: none;
     height: 180px;
     width: 100%;
     padding:10px  20px;
     // border: solid 1px red;
     border-radius: 20px;
-    background: url("./productBanner.svg");
-    color: var(--black);
+    background: url("./banner2.jpg");
+    object-fit: cover;
+    color: var(--white);
     background-position: center;
 }
 

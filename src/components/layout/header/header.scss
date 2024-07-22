@@ -1,0 +1,47 @@
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: solid 1px var(--lightGray);
+    background: var(--lightGray2);
+    >img{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+    nav{
+
+      
+    }
+}
+.btn{
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: var(--linearColor);
+    font-size: 15px;
+    font-weight: 500;
+    // border: solid 1px var(--darkGreen);
+    margin: 0 5px;
+    
+    >svg{
+        font-size: 20px;
+    }
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .link{
+        font-size: 20px;
+        // border: solid 1px red;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .active{
+        color: var(--lightRed);
+    }
+}

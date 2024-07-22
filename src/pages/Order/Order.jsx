@@ -98,32 +98,34 @@ console.log( productList);
           headers: { "Content-Type": "application/json", },
           withCredentials: true
       })
-      console.log(data.order.id , data.key , data.order , data?.data?._id)
+      // console.log(data.order.id , data.key , data.order , data?.data?._id)
 
-      console.log(window);
+      if(paymentType === 'online'){
 
-      const options = {
-        key : data.key ,
-        amount: data.order.amount,
-        currency: "INR",
-        name: "Apna Bazar",
-        description: "Build your healthy Life",
-        image: "https://www.pngall.com/wp-content/uploads/8/Market-PNG-Image.png",
-        order_id: data.order.id,
-        callback_url:`${baseUrl}/order/pay/${data?.data?._id}`,
-        prefill: {
-            name: user.name,
-            email: user.email,
-            contact: "7047808326"
-        },
-        notes: {
-            "address": "Razorpay Corporate Office"
-        },
-    };
+        const options = {
+          key : data.key ,
+          amount: data.order.amount,
+          currency: "INR",
+          name: "Apna Bazar",
+          description: "Build your healthy Life",
+          image: "https://www.pngall.com/wp-content/uploads/8/Market-PNG-Image.png",
+          order_id: data.order.id,
+          callback_url:`${baseUrl}/order/pay/${data?.data?._id}`,
+          prefill: {
+              name: user.name,
+              email: user.email,
+              contact: "7047808326"
+          },
+          notes: {
+              "address": "Razorpay Corporate Office"
+          },
+      };
+       
+        const razor = new window.Razorpay(options);
+        razor.open();
      
-      const razor = new window.Razorpay(options);
-      razor.open();
-   
+      }
+
 
       } catch (error) {
         console.log(error);

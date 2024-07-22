@@ -21,7 +21,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [thisProduct, setThisProduct] = useState({});
-
+  const navigator = useNavigate()
   const [reting , setReting] = useState(0)
   const [feedback , setFeedback] = useState("")
   
@@ -56,6 +56,11 @@ const ProductDetails = () => {
 
   const addToCart =()=>{
     dispatch(addCard(data))
+    navigator('/cart')
+  }
+
+  const orderProduct =()=>{
+
   }
 
   return (
@@ -112,7 +117,7 @@ const ProductDetails = () => {
           
           <button onClick={addToCart}> <FaCartShopping/> Add to Cart</button>
           
-          <button className="bye"> <HiMiniCurrencyRupee/> Bye Product</button>
+          <button className="bye" onClick={orderProduct}> <HiMiniCurrencyRupee/> Bye Product</button>
         </div>
        {
          isAddFeedback? (

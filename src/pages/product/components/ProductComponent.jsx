@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import pumpkin from "./pumpkin.png";
 import { IoHeart } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,12 +7,23 @@ import { TiShoppingCart } from "react-icons/ti";
 import { BsCurrencyRupee } from "react-icons/bs";
 
 import "./productComponent.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function ProductComponent({ id , thumbnail ,  name, price, actualPrice ,reting, discount }) {
+function ProductComponent({ id , thumbnail ,  name, price, actualPrice ,reting,stock ,  discount }) {
 
   const dispatch = useDispatch();
   const { user } = useSelector(state=>state.user)
+  const navigator = useNavigate()
+  
+  const [isOutOfStock , setIsOutOfStock] = useState(false)
+  console.log(stock , typeof stock);
+  const navigate = useNavigate()
+  useEffect(()=>{
+  if (stock === 0) {
+    setIsOutOfStock(true)
+  } 
+
+  },[])
 
   const cardHandle = async () => {
     const data = {
@@ -20,17 +31,18 @@ function ProductComponent({ id , thumbnail ,  name, price, actualPrice ,reting, 
       price:actualPrice
     };
     dispatch(addCard(data));
+    navigate('/cart')
   };
-
 
   return (
     <div className="product">
+
       <div className="dicount_container">
         <p>{discount}%</p>
         <IoHeart className="heart" />
       </div>
 
-      <div className="image_container">
+      <div className="image_container"  onClick={()=>{ navigator(`/product/${id}`)}} >
         <img className="product_image" src={thumbnail.url} alt="" />
       </div>
 
@@ -39,14 +51,16 @@ function ProductComponent({ id , thumbnail ,  name, price, actualPrice ,reting, 
         
         <span className="ammount_of_product"> 250 g </span>
         <p className="prise">
-          <BsCurrencyRupee/> {actualPrice} <del> {price} </del>
+          <BsCurrencyRupee/> {actualPrice} <del style={{color:'red', marginLeft:'5px' }}> {price} </del>
         </p>
+        { !isOutOfStock?stock < 10 ?(<p style={{color:'red'}}>Last {stock} product is available</p>):"":""}
         <div className="buttons">
-          <Link to={'/cart'}>
-          <button className="cart_button" onClick={cardHandle}>
-            <TiShoppingCart/>  Cart
+        
+          
+          <button className={isOutOfStock?"out_of_stock":""} onClick={()=>{!isOutOfStock?cardHandle():""}}>
+            <TiShoppingCart/> { isOutOfStock?"Out Of Stock":"Add" }
           </button>
-          </Link>
+          
 
   
         </div>

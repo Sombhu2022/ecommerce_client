@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./product.scss";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GoArrowRight } from "react-icons/go";
 import { FaCartShopping } from "react-icons/fa6";
 import ProductComponent from "./components/ProductComponent";
@@ -10,13 +10,13 @@ import {useSelector } from 'react-redux'
 function Product() {
   const { product , status} =  useSelector((state)=> state.product)
   const [products , setProducts] = useState([])
-
+ const  navigator = useNavigate() 
   useEffect(()=>{
     if(status === 'success'){
       setProducts(product)
     }
   },[ product ])
-
+console.log(products);
   return (
     <div className="product_page">
       
@@ -51,18 +51,25 @@ function Product() {
       <div className="product_container"> 
       {
         products?.map((ele , index)=>{
+          // to={`/product/${ele._id}`}
+
              return(
-              <Link className="link" key={ele._id} to={`/product/${ele._id}`}>
-                <ProductComponent id={ele._id} thumbnail={ele.images? ele.images[0]:""} price={ele.price} actualPrice={ele.actualPrice} name={ele.name} discount={ele.discount}/>
-              </Link>
+              <div className="link" key={ele._id}  >
+                <ProductComponent 
+                id={ele._id} 
+                thumbnail={ele.images? ele.images[0]:""} 
+                price={ele.price} 
+                actualPrice={ele.actualPrice} 
+                name={ele.name} 
+                discount={ele.discount}
+                stock = {ele.stock}
+                />
+              </div>
              )
           })
         }
         
          
-      </div>
-      <div>
-        
       </div>
     </div>
   );
