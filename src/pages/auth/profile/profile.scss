@@ -1,0 +1,15 @@
+.profile-container{
+    height: 100vh;
+    width: 100vw;
+    // border: solid 1px red;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+    >img{
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+    }
+}

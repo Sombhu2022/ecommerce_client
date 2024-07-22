@@ -26,7 +26,7 @@ function CartPage() {
      if(status === 'success'){
         setProducts(product)
      }
-     if(product.totalAmmount < 500 ){
+     if(product?.totalAmmount < 500 ){
       setDelivaryFees(49)
      }else{
         setDelivaryFees(0)
@@ -34,6 +34,8 @@ function CartPage() {
    } , [ product ])
    console.log(products);
 
+  if(!products || products?.cart?.length < 1)  return <div className='empty_cart'> <p>Your Cart is Fully Empty </p> </div> 
+ 
   return (
     <div>
         <h1> Your Cart </h1>
@@ -52,7 +54,7 @@ function CartPage() {
         <div className='price_container'>
 
         <div className='price price2'>{
-            products?(<> <span style={{color:'black'}}> Total Product Cost :- </span><BsCurrencyRupee/>  {products.totalAmmount}</>):""
+            products?(<> <span style={{color:'black'}}> Total Product Cost :- </span><BsCurrencyRupee/>  {products?.totalAmmount}</>):""
         }
      
         </div>
@@ -63,7 +65,7 @@ function CartPage() {
         </div>
       
         <div className=' total_price'>{
-            products?(<div className='price'> <span style={{color:'black'}}> Total Cost :- </span><BsCurrencyRupee/>  {products.totalAmmount + delivaryFees}</div>):""
+            products?(<div className='price'> <span style={{color:'black'}}> Total Cost :- </span><BsCurrencyRupee/>  {products?.totalAmmount + delivaryFees}</div>):""
         }
          <div className="button">  
           <button className="bye" onClick={()=>{

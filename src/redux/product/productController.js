@@ -47,3 +47,29 @@ export const addReview =createAsyncThunk("product/addReview"  , async({id ,retin
     console.log(data);
     return data
 })
+
+export const updateProduct = createAsyncThunk('product/updateProduct' , async({id , stock , price , discount})=>{
+    console.table({id , stock,price ,discount});
+    const { data } = await API.patch(`${baseUrl}/product/${id}` , { stock , price , discount} , 
+    {
+        headers: { "Content-Type": "multipart/form-data", },
+        withCredentials: true
+    },
+    )
+    
+    console.log(data);
+ return data
+})
+
+export const deleteProduct = createAsyncThunk('product/deleteProduct' , async({id })=>{
+
+    const { data } = await API.delete(`${baseUrl}/product/${id}` , 
+    {
+        headers: { "Content-Type": "multipart/form-data", },
+        withCredentials: true
+    },
+    )
+
+    console.log(data);
+ return data
+})

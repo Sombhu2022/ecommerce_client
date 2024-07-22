@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addProduct, addReview, allProduct, selectProduct } from "./productController";
+import { addProduct, addReview, allProduct, deleteProduct, selectProduct, updateProduct } from "./productController";
 
 const initialState = {
     product:[],
@@ -71,6 +71,32 @@ export const productSlice = createSlice({
             state.messege=""
         })
         builder.addCase(addReview.rejected , (state , action)=>{
+            state.status="rejected"
+            state.messege=action.error.message
+        })
+        builder.addCase(updateProduct.pending , (state , action)=>{
+            state.status="panding"
+            state.messege=""
+        })
+        builder.addCase(updateProduct.fulfilled , (state , action)=>{
+            state.product = action.payload.product
+            state.status="success"
+            state.messege=""
+        })
+        builder.addCase(updateProduct.rejected , (state , action)=>{
+            state.status="rejected"
+            state.messege=action.error.message
+        })
+        builder.addCase(deleteProduct.pending , (state , action)=>{
+            state.status="panding"
+            state.messege=""
+        })
+        builder.addCase(deleteProduct.fulfilled , (state , action)=>{
+            state.product = action.payload.product
+            state.status="success"
+            state.messege=""
+        })
+        builder.addCase(deleteProduct.rejected , (state , action)=>{
             state.status="rejected"
             state.messege=action.error.message
         })

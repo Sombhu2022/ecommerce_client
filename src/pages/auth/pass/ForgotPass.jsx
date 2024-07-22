@@ -1,34 +1,28 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./forgot.scss";
+import API from "../../../utils/axiosSetup";
+import { baseUrl } from "../../../App";
 
 function ForgotPass() {
-	const [pass, setPass] = useState({});
+	
+	const [email , setEmail] = useState({});
 	const navigate = useNavigate();
-	const hendleData = (e) => {
-		setPass({ ...pass, [e.target.name]: e.target.value });
-	};
-
+	
 	const handleLogin = async (e) => {
 		e.preventDefault();
-
+  
 		try {
-			const { data } = await axios.post(
-				"http://localhost:8080/auth/forgotPassword",
-				pass,
-				{
-					headers: {
-						"Content-Type": "application/json",
-					},
-					withCredentials: true,
-				}
-			);
-			toast.success(data.message);
+			const { data } =await API.post(`${baseUrl}/user/sendOtp` , {email}, {
+				headers: {
+				  Content_type: "application/json",
+				}})
+	
 			console.log("success", data);
-			navigate("/");
+			navigate('/auth/forgate-password/new-password')
 		} catch (error) {
 			console.log(error);
-			toast.error(error.response.data.message);
+			
 		}
 	};
 	return (
@@ -42,12 +36,9 @@ function ForgotPass() {
 						name='email'
 						id=''
 						placeholder='enter valid email '
-						onChange={hendleData}
+						onChange={(e)=>setEmail(e.target.value)}
 					/>
-					<Link to={"/auth/forgotPassword/newpass"}>
-						{" "}
-						<button type='submit'>next</button>{" "}
-					</Link>
+					<button type='submit'>next</button>{" "}
 				</form>
 			</div>
 		</div>

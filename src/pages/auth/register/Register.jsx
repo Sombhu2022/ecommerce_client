@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../../../redux/user/userController";
 import moment from 'moment'
+import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState();
@@ -14,7 +15,7 @@ function Register() {
   const [dp, setDp] = useState();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.user);
-
+  const navigate = useNavigate();
   console.log(state);
 
   const fileHandle = async (e) => {
@@ -88,10 +89,12 @@ function Register() {
           onChange={(e) => setCPassword(e.target.value)}
         />
         <button>Submit</button>
+       <br/> <h4>if you are alrady register then : 
+        <Link to={'/login'}>Log in</Link> </h4>
       </form>
       {state.status ==="pending" ? <div>loading</div> : ""}
       {
-        state.user.createAt ? (<h1>ok</h1>):""
+        state.user.createAt ? ( navigate('/')):""
       }
     </div>
   );

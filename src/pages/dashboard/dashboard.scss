@@ -1,0 +1,53 @@
+.item-container{
+    border: solid 1px var(--lightGray);
+    border-radius: 10px;
+    background: var(--lightGray2);
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 600px;
+    justify-content: space-evenly;
+    >.product_image{
+       height: 150px;
+       width: 150px;
+       display: flex;
+       flex-direction: column;
+       gap: 10px;
+       >img{
+           border-radius: 5px;
+           height: 100%;
+           width: 100%;
+           object-fit: cover;
+       }
+       >.name{
+           >p{
+               font-size: 20px;
+               color: var(--black);
+           }
+           >.id{
+               font-size: 14px;
+               color: var(--darkGray2);
+           }
+       }
+    }
+    >.product_details{
+        >.form{
+            width: 200px !important;
+            // border: solid 1px red;
+            >.button{
+                display: flex;
+                flex-direction: column !important;
+                width: 100% !important;
+                button{
+                    width: 100%;
+                }
+                .update{
+                    border: solid 1px var(--orenge);
+                    background: rgba(253, 146, 16, 0.123);
+                }
+            }
+           }
+    }
+}

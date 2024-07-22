@@ -14,12 +14,12 @@ function Cart({ product , totalPrice , quantity}) {
   return (
     <div className='cart'>
      <div className='product_image'>
-      <img src={product.images[0]?.url} alt="" />
+      <img src={product?.images[0]?.url} alt="" />
      </div>
      <div className='product_details'>
       <div className='name'>
-        <p>{product.name}</p>
-        <p className='id'>{product._id}</p>
+        <p>{product?.name}</p>
+        <p className='id'>{product?._id}</p>
       </div>
       <div className='button'>
         {

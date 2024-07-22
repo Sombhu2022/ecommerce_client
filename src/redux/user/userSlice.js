@@ -56,7 +56,7 @@ export const userSlice = createSlice({
         builder.addCase(logInUser.fulfilled ,(state , action)=>{
             //  state.error = action.payload
             state.status ="loginSuccess";
-            state.message = action.payload.message 
+            // state.message = action.payload.message
             state.isAuthenticate = true;
             state.user = action.payload.user
             localStorage.setItem("token" , action.payload.token)
