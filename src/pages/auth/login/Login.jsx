@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './login.scss'
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ function Login() {
 	const [password , setPassword]=useState();
     
 	const dispatch = useDispatch()
-  const {user} = useSelector(state => state.user)
+  const {user , status} = useSelector(state => state.user)
 
 
 	const submitHandle=async(e)=>{
@@ -21,8 +21,11 @@ function Login() {
       
 	}
   const navigate = useNavigate()
+console.log("redux data",user);
+  useEffect(()=>{
+    if(status === "loginSuccess") navigate('/')
 
-  if(user.status === "loginSuccess") navigate('/')
+  },[user , status])
 
   return (
 	<div className='login-page'>
