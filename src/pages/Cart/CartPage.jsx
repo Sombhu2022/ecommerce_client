@@ -38,7 +38,7 @@ function CartPage() {
  
   return (
     <div>
-        <h1> Your Cart </h1>
+        <h1 className=''> Your Cart </h1>
         <div className='all_cart'>
 
         {

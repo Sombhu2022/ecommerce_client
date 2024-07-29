@@ -7,15 +7,25 @@ import { FaCartShopping } from "react-icons/fa6";
 import ProductComponent from "./components/ProductComponent";
 import {useSelector } from 'react-redux'
 
+import Loader from 'react-js-loader'
+import { productStatusclean } from "../../redux/product/productSlice";
+
 function Product() {
   const { product , status} =  useSelector((state)=> state.product)
   const [products , setProducts] = useState([])
  const  navigator = useNavigate() 
   useEffect(()=>{
-    if(status === 'success'){
+    if(status.allProduct === 'pending'){
+      <Loader type={"spinner-circle"} bgColor={'white'}  color={"green"} size={40} />
+      
+    }
+    if(status.allProduct === 'success'){
       setProducts(product)
     }
-  },[ product ])
+    return()=>{
+      productStatusclean();
+    }
+  },[ product , status.allProduct ])
 console.log(products);
   return (
     <div className="product_page">
@@ -41,9 +51,9 @@ console.log(products);
      </div>
 
       <div className="total_info">
-        <p> Showing all 16 Result </p>
+        <p> Showing all {products.length} Result </p>
         <div>
-        <p> Show: 20 items</p>
+        <p> Show: {products.length} items</p>
         <p> <FaCartShopping/></p>
         </div>
       </div>
