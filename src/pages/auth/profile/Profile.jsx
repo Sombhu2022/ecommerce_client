@@ -17,7 +17,7 @@ function Profile() {
 
         </div>
         <div className='option-container'>
-            <Link to={'/profile/changePassword'}>
+            <Link to={'/profile/changePassword'} className='text-blue-600'>
               Change Password
             </Link>
             <Link>

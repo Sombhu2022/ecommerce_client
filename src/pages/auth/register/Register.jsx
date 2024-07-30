@@ -51,8 +51,8 @@ function Register() {
 
   return (
     <div className="register_page">
-      <form action="" className="form" onSubmit={submitHandle}>
-        <h2>Register Page</h2>
+      <form action="" className=" form shadow-lg" onSubmit={submitHandle}>
+        <h2 className="text-2xl text-center text-gray-600">Register Page</h2>
         <input
           type="file"
           name="dp"
@@ -89,8 +89,8 @@ function Register() {
           onChange={(e) => setCPassword(e.target.value)}
         />
         <button>Submit</button>
-       <br/> <h4>if you are alrady register then : 
-        <Link to={'/login'}>Log in</Link> </h4>
+       <br/> <h4 className="pl-3 text-gray-600">if you are alrady register then  
+        <Link to={'/login'} className="text-blue-600 ml-3">Log in</Link> </h4>
       </form>
       {state.status ==="pending" ? <div>loading</div> : ""}
       {

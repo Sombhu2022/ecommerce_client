@@ -26,10 +26,10 @@ function ForgotPass() {
 		}
 	};
 	return (
-		<div>
-			<div className='forgot_container'>
-				<form action='' className='auth-form' onSubmit={handleLogin}>
-					<b style={{ fontSize: "25px" }}>Forgot password</b>
+		
+		<div className='w-[100vw] h-[100vh] flex justify-center items-center'> 
+				<form action='' className='form min-w-[300px]' onSubmit={handleLogin}>
+					<h4 className="text-center text-gray-600 text-2xl">Forgot password</h4>
 
 					<input
 						type='email'
@@ -41,7 +41,7 @@ function ForgotPass() {
 					<button type='submit'>next</button>{" "}
 				</form>
 			</div>
-		</div>
+	
 	);
 }
 

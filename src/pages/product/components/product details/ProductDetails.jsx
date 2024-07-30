@@ -21,13 +21,14 @@ const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [thisProduct, setThisProduct] = useState({});
-  const navigator = useNavigate()
+  const navigate = useNavigate()
   const [reting , setReting] = useState(0)
   const [feedback , setFeedback] = useState("")
   
   const [ isAddFeedback , setIsAddFeedback ] = useState(false)
 
   const { selectedProduct, status ,product } = useSelector((state) => state.product);
+  const {isAuthenticate } = useSelector((state)=> state.user )
 
   // console.log(selectedProduct);
   useEffect(() => {
@@ -37,13 +38,14 @@ const ProductDetails = () => {
  
   useEffect(() => {
     console.log("useeffect run");
-    if (status === "success") {
+    if (status.selectProduct === "success" || status.reviewProduct === 'success') {
       setThisProduct(selectedProduct);
     }
-  }, [status]);
+  }, [status.selectProduct , status.reviewProduct]);
 
   const reviewHandle =(e)=>{
     e.preventDefault();
+    if (!isAuthenticate) return navigate('/login')
    console.log(reting , feedback);
    dispatch(addReview({ id:thisProduct._id, reting, feedback}))
    console.log("ok");
@@ -55,12 +57,13 @@ const ProductDetails = () => {
   };
 
   const addToCart =()=>{
+    if(!isAuthenticate) return navigate('/login')
     dispatch(addCard(data))
-    navigator('/cart')
+    navigate('/cart')
   }
 
   const orderProduct =()=>{
-
+    if(!isAuthenticate) return navigate('/login')
   }
 
   return (
@@ -146,8 +149,8 @@ const ProductDetails = () => {
           return(
             <div className="review" key={ele._id}>
                <div className="user-info">
-                <img src={ele.user.dp.url} alt="" />
-                <p>{ ele.user.name} </p>
+                <img src={ele?.user?.dp.url} alt="" />
+                <p>{ ele?.user?.name} </p>
                </div>
                <div>
                   <div className="ratting">
