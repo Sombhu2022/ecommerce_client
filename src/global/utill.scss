@@ -1,6 +1,7 @@
 .form{
-    width: 500px;
+    max-width: 500px;
     background: var(--lightGray2);
+    margin: 5px;
     padding:10px 10px;
     border-radius: 6px;
     >input , >textarea , >select{

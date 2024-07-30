@@ -30,7 +30,7 @@ console.log("redux data",user);
   return (
 	<div className='login-page'>
 		<form action="" className='form' onSubmit={submitHandle}>
-		<h2>Login Page</h2>
+		<h2 className='text-gray-600 text-2xl text-center'>Login Page</h2>
           <input
             type="email"
             name="email"
@@ -47,12 +47,12 @@ console.log("redux data",user);
           />
 
 		  <button>Submit</button> <br></br>
-    <h4> if you are not register 
-      <Link to="/register">
+    <h4 className='text-gray-600 ml-4'> if you are not register 
+      <Link to="/register" className='ml-4 text-blue-600'>
         Register now 
       </Link>
     </h4>
-    <Link to={'/auth/forgate-password'}>forgate password</Link>
+    <Link to={'/auth/forgate-password'} className='ml-4 text-blue-600'>forgate password</Link>
 		</form>
 	</div>
   )

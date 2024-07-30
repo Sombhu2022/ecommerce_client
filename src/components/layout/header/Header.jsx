@@ -71,7 +71,8 @@ const Header = () => {
             <NavLink className="link" to={'/'}> <IoHomeSharp/> Home </NavLink>
             <NavLink className="link" to={'/cart'}> <TiShoppingCart/> Cart </NavLink>
             <NavLink className="link" to={'/profile'}> <IoSettingsSharp/> Profile </NavLink>
-     {isAdmin? (<button className="btn" onClick={()=>navigate('/add')} >Add Product</button>):""}
+     {isAdmin? (<><button className="btn" onClick={()=>navigate('/add')} >Add Product</button>
+                <button className="btn" onClick={()=>navigate('/dashboard')} >Dashboard</button></> ):""}
 
       </div>
     )}

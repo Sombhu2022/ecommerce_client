@@ -24,10 +24,10 @@ function NewPass() {
   }
 
   return (
-     
-  <div className='forgot_container'>
-  <form action="" className='auth-form' onSubmit={handleLogin}>
-  <b style={{fontSize:"25px" }}>Forgot password</b>
+    <div className='w-[100vw] h-[100vh] flex justify-center items-center'> 
+
+  <form action="" className='form' onSubmit={handleLogin}>
+  <h4 className='text-2xl text-gray-600 text-center'>Forgot password</h4>
   <input type="number" name="otp" id="" placeholder='enter otp ' onChange={(e)=>setOtp(e.target.value) }/>
   <input type="password" name="newPassword" id="" placeholder='enter new password ' onChange={(e)=>setPassword(e.target.value)}/>
   <input type="password" name="confirmNewPassword" id="" placeholder='enter confirm password ' onChange={(e)=>setConfirmPassword(e.target.value)}/>

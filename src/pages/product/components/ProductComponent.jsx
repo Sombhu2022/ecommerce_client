@@ -12,8 +12,8 @@ import { Link, useNavigate } from "react-router-dom";
 function ProductComponent({ id , thumbnail ,  name, price, actualPrice ,reting,stock ,  discount }) {
 
   const dispatch = useDispatch();
-  const { user } = useSelector(state=>state.user)
-  const navigator = useNavigate()
+  const { user , isAuthenticate } = useSelector(state=>state.user)
+
   
   const [isOutOfStock , setIsOutOfStock] = useState(false)
   console.log(stock , typeof stock);
@@ -26,6 +26,7 @@ function ProductComponent({ id , thumbnail ,  name, price, actualPrice ,reting,s
   },[])
 
   const cardHandle = async () => {
+    if(!isAuthenticate) return navigate('/login')
     const data = {
       productId:id ,
       price:actualPrice
@@ -42,7 +43,7 @@ function ProductComponent({ id , thumbnail ,  name, price, actualPrice ,reting,s
         <IoHeart className="heart" />
       </div>
 
-      <div className="image_container"  onClick={()=>{ navigator(`/product/${id}`)}} >
+      <div className="image_container"  onClick={()=>{ navigate(`/product/${id}`)}} >
         <img className="product_image" src={thumbnail.url} alt="" />
       </div>
 
