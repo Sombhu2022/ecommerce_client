@@ -1,10 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authUser, createUser, logInUser, logoutUser } from "./userController";
+import { authUser, changePassword, createUser, ForgetPasswordWithOtp, logInUser, logoutUser, sendOtpForForgetPassword } from "./userController";
 
 const initialState = {
     user:{},
     isAuthenticate:false,
-    status:null,
+    status:{
+        regUser:'',
+        loginUser:'',
+        authenticateUser:'',
+        logoutUser:'',
+        changePassword:'',
+        sendOtp:'',
+        forgetPassword:''
+    },
     error:null,
     message:null,
 }
@@ -14,14 +22,14 @@ export const userSlice = createSlice({
     initialState,
     reducers:{
         resateStatus(state , action ){
-            state.status = "ideal"
+            state.status.authenticateUser = ''
             state.error = null
         }
 
     },
     extraReducers:(builder)=>{
         builder.addCase( createUser.pending , (state , action)=>{
-            state.status ="pending";
+            state.status.regUser ="pending";
             state.error =null
             state.isAuthenticate=false
             state.user = {}
@@ -30,7 +38,7 @@ export const userSlice = createSlice({
 
         builder.addCase(createUser.fulfilled ,(state , action)=>{
             //  state.error = action.payload
-            state.status ="regSuccess";
+            state.status.regUser ="success";
             state.message = action.payload.message 
             state.isAuthenticate = true;
             state.user = action.payload.user
@@ -40,13 +48,13 @@ export const userSlice = createSlice({
 
         builder.addCase(createUser.rejected , (state , action)=>{
             state.error=action.error.message
-            state.status="rejected"
+            state.status.regUser="rejected"
             state.isAuthenticate=false
             state.message = action.error.message
         })
 
         builder.addCase(logInUser.pending , (state , action)=>{
-            state.status="pending"
+            state.status.loginUser="pending"
             state.error =null
             state.isAuthenticate=false
             state.user = {}
@@ -55,7 +63,7 @@ export const userSlice = createSlice({
        
         builder.addCase(logInUser.fulfilled ,(state , action)=>{
             //  state.error = action.payload
-            state.status ="loginSuccess";
+            state.status.loginUser ="success";
             // state.message = action.payload.message
             state.isAuthenticate = true;
             state.user = action.payload.user
@@ -65,7 +73,7 @@ export const userSlice = createSlice({
 
         builder.addCase(logInUser.rejected , (state , action)=>{
             state.error=action.error.message
-            state.status="rejected"
+            state.status.loginUser ="rejected"
             state.isAuthenticate=false
             state.message = action.error.message
         })
@@ -73,7 +81,7 @@ export const userSlice = createSlice({
 
 
         builder.addCase(authUser.pending , (state , action)=>{
-            state.status="pending"
+            state.status.authenticateUser="pending"
             state.error =null
             state.isAuthenticate=false
             state.user = {}
@@ -82,7 +90,7 @@ export const userSlice = createSlice({
        
         builder.addCase(authUser.fulfilled ,(state , action)=>{
             //  state.error = action.payload
-            state.status ="selectSuccess";
+            state.status.authenticateUser ="success";
             state.message = action.payload.message 
             state.isAuthenticate = true;
             state.user = action.payload.user
@@ -92,14 +100,14 @@ export const userSlice = createSlice({
 
         builder.addCase(authUser.rejected , (state , action)=>{
             state.error=action.error.message
-            state.status="rejected"
+            state.status.authenticateUser ="rejected"
             state.isAuthenticate=false
             state.message = action.error.message
         })
 
 
         builder.addCase(logoutUser.pending , (state , action)=>{
-            state.status="pending"
+            state.status.logoutUser ="pending"
             state.error =null
             state.isAuthenticate=false
             state.user = {}
@@ -108,7 +116,7 @@ export const userSlice = createSlice({
        
         builder.addCase(logoutUser.fulfilled ,(state , action)=>{
             //  state.error = action.payload
-            state.status ="logoutSuccess";
+            state.status.logoutUser ="success";
             state.message = action.payload.message 
             state.isAuthenticate = false;
             state.user = {}
@@ -118,10 +126,60 @@ export const userSlice = createSlice({
 
         builder.addCase(logoutUser.rejected , (state , action)=>{
             state.error=action.error.message
-            state.status="rejected"
+            state.status.logoutUser ="rejected"
             state.isAuthenticate=false
             state.message = action.error.message
         })
+
+        // change password 
+
+        builder.addCase(changePassword.pending , (state , action)=>{
+            state.status.changePassword ="pending";
+            state.error =null
+        })
+        builder.addCase(changePassword.fulfilled , (state , action)=>{
+            state.status.changePassword ="success";
+            state.error =null
+            state.message = action.payload.message 
+            state.isAuthenticate = true;
+            state.user = action.payload.user
+            localStorage.setItem("token" , action.payload.token)
+        })
+        builder.addCase(changePassword.rejected , (state , action)=>{
+            state.status.changePassword ="rejected";
+            state.error = action.error.message
+            
+        })
+
+
+        builder.addCase(sendOtpForForgetPassword.pending , (state , action)=>{
+            state.status.sendOtp ="pending";
+            state.error =null
+        })
+        builder.addCase(sendOtpForForgetPassword.fulfilled , (state , action)=>{
+            state.status.sendOtp ="success";
+            state.error =null 
+        })
+        builder.addCase(sendOtpForForgetPassword.rejected , (state , action)=>{
+            state.status.sendOtp ="rejected";
+            state.error =null
+        })
+
+
+        builder.addCase(ForgetPasswordWithOtp.pending , (state , action)=>{
+            state.status.forgetPassword ="pending";
+            state.error =null
+        })
+        builder.addCase(ForgetPasswordWithOtp.fulfilled , (state , action)=>{
+            state.status.forgetPassword ="success";
+            state.error =null 
+        })
+        builder.addCase(ForgetPasswordWithOtp.rejected , (state , action)=>{
+            state.status.forgetPassword ="rejected";
+            state.error =null
+        })
+
+
 
 
     }
