@@ -20,7 +20,7 @@ export const cartSlice = createSlice({
 
         builder
         .addCase( addCard.pending ,(state , action)=>{
-            state.status ="panding";
+            state.status ="pending";
             state.message = null
 
         })
@@ -37,7 +37,7 @@ export const cartSlice = createSlice({
         })
         
         .addCase( getCart.pending ,(state , action)=>{
-            state.status ="panding";
+            state.status ="pending";
             state.message = null
 
         })
@@ -54,7 +54,7 @@ export const cartSlice = createSlice({
             state.error = true
         })
         .addCase( updateProductQantity.pending ,(state , action)=>{
-            state.status ="panding";
+            state.status ="pending";
             state.message = null
 
         })

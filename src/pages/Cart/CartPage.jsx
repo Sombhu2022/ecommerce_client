@@ -10,7 +10,11 @@ import { FaCartShopping } from "react-icons/fa6";
 import { HiMiniCurrencyRupee } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
 
+import { spiral } from "ldrs";
+
+
 function CartPage() {
+  spiral.register()
   const [products , setProducts] = useState([])
   const [delivaryFees , setDelivaryFees ] =useState(0)
 
@@ -31,14 +35,21 @@ function CartPage() {
      }else{
         setDelivaryFees(0)
      }
-   } , [ product ])
+   } , [ product , status])
    console.log(products);
+
+   if(status === 'pending'){
+    return( <div className="h-[100vh] w-[100vw] flex justify-center items-center"> 
+    <l-spiral size="60" speed="0.9" color="green"></l-spiral> 
+     </div>);
+ 
+     }
 
   if(!products || products?.cart?.length < 1)  return <div className='empty_cart'> <p>Your Cart is Fully Empty </p> </div> 
  
   return (
     <div>
-        <h1 className=''> Your Cart </h1>
+        <h1 className='text-2xl text-gray-600 text-center'> Your Cart </h1>
         <div className='all_cart'>
 
         {

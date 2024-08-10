@@ -17,7 +17,12 @@ import { FaCartShopping } from "react-icons/fa6";
 import { HiMiniCurrencyRupee } from "react-icons/hi2";
 import { addCard } from "../../../../redux/cart/cartController";
 
+import { spiral } from "ldrs";
+
+
 const ProductDetails = () => {
+  spiral.register()
+  const [isLoading , setIsLoading] = useState(false)
   const { id } = useParams();
   const dispatch = useDispatch();
   const [thisProduct, setThisProduct] = useState({});
@@ -37,7 +42,11 @@ const ProductDetails = () => {
 
  
   useEffect(() => {
-    console.log("useeffect run");
+    if(status.selectProduct === 'pending'){
+       setIsLoading(true)
+    }else{
+      setIsLoading(false)
+    }
     if (status.selectProduct === "success" || status.reviewProduct === 'success') {
       setThisProduct(selectedProduct);
     }
@@ -64,12 +73,20 @@ const ProductDetails = () => {
 
   const orderProduct =()=>{
     if(!isAuthenticate) return navigate('/login')
+      
   }
 
   return (
-<>  <div className="product_details_page">
-      <div className="product_image_container">
+<> {
+  isLoading ?
+    
+  <div className="h-[100vh] w-[100vw] flex justify-center items-center"> <l-spiral size="60" speed="0.9" color="green"></l-spiral>  </div>
+  :
 
+<>
+ <div className="product_details_page">
+      <div className="product_image_container">
+       
         <Carousel
           infiniteLoop
           autoPlay
@@ -101,11 +118,15 @@ const ProductDetails = () => {
             </div>
             <div className="rating">
              <Rate count={5} value={thisProduct.totalRating} allowHalf disabled  />
-             <span>{ thisProduct.totalReview} </span> 
+             <span>{ thisProduct.totalReview || 0} </span> 
             </div>
-            <div className="category">
-            <span > <FaLeaf/> {thisProduct.category}</span>
-            </div>
+            
+            <div className="w-auto">
+                <span className="category inline-flex items-center">
+                <FaLeaf className="mr-2" /> {thisProduct.category}
+             </span>
+           </div>
+
               
             <p>{thisProduct.brand}</p>
         
@@ -165,8 +186,8 @@ const ProductDetails = () => {
         })
 
       }
-    </div>
-
+    </div></>
+}
     </> 
   );
 };

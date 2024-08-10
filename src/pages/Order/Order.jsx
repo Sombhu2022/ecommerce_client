@@ -149,12 +149,12 @@ console.log( productList);
       // }
   
   return (
-    <div>
-      <h2>
+    <div className=' w-[100vw] flex flex-col gap-3 justify-center items-center '>
+      <h2 className='text-2xl text-gray-700 '>
         Order Your Products 
       </h2>
 
-      { isAddLoc?(
+      { !isAddLoc?(
       <div className="form_container2">
         <form action="" className="form" >
 
@@ -234,15 +234,15 @@ console.log( productList);
            >
            Add Location
           </button>
-        <div className='current_location'>
+        {/* <div className='current_location'>
 
          <button onClick={getCurrentLocation}> <MdMyLocation/> {isLoading? "loading....":"Use Current Location" }  </button>
-        </div>
+        </div> */}
         </form>
       </div>):""
       }
 
-     <button onClick={()=>setIsAddLoc(!isAddLoc)}> { isAddLoc? "Hide Form":"Add Location"} </button>
+     {/* <button className='button' onClick={()=>setIsAddLoc(!isAddLoc)}> { isAddLoc? "Hide Form":"Add Location"} </button> */}
   
     </div>
   )
