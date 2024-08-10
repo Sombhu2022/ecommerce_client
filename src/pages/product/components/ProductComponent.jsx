@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import pumpkin from "./pumpkin.png";
 import { IoHeart } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { addCard } from "../../../redux/cart/cartController";
@@ -18,6 +17,7 @@ function ProductComponent({ id , thumbnail ,  name, price, actualPrice ,reting,s
   const [isOutOfStock , setIsOutOfStock] = useState(false)
   console.log(stock , typeof stock);
   const navigate = useNavigate()
+
   useEffect(()=>{
   if (stock === 0) {
     setIsOutOfStock(true)

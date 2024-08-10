@@ -1,26 +1,19 @@
 import React, { useState } from 'react'
 import API from '../../../utils/axiosSetup';
 import { baseUrl } from '../../../App';
+import { useDispatch } from 'react-redux';
+import { changePassword } from '../../../redux/user/userController';
 
 function ChangePass() {
 
   const [oldPassword , setOldPassword] = useState("");
   const [newPassword , setNewPassword ] = useState("");
+  const dispatch = useDispatch()
 
   const handleSubmit = async(e)=>{
     e.preventDefault();
-     try {
-       const { data } = await API.post(`${baseUrl}/user/changePassword` , { oldPassword , newPassword},
-        {
-          headers:{
-            "Content-Type":"application/json"
-          }
-        }
-       )
-       console.log(data);
-     } catch (error) {
-      console.log(error);
-     }
+    dispatch(changePassword({oldPassword , newPassword}))   
+  
   } 
 
   return (

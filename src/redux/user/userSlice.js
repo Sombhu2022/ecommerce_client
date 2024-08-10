@@ -21,12 +21,17 @@ export const userSlice = createSlice({
     name:"user",
     initialState,
     reducers:{
-        resateStatus(state , action ){
-            state.status.authenticateUser = ''
-            state.error = null
-        }
-
+        resateUserStatus(state , action ){
+               state.status.regUser=''
+               state.status.loginUser=''
+               state.status.authenticateUser=''
+               state.status.logoutUser=''
+               state.status.changePassword=''
+               state.status.sendOtp=''
+               state.status.forgetPassword=''
+            }
     },
+
     extraReducers:(builder)=>{
         builder.addCase( createUser.pending , (state , action)=>{
             state.status.regUser ="pending";
@@ -185,5 +190,5 @@ export const userSlice = createSlice({
     }
 })
 
-
+export const { resateUserStatus }= userSlice.actions
 export default userSlice.reducer

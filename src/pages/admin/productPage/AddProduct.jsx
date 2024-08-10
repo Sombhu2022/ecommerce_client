@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { IoCloudUploadSharp } from "react-icons/io5";
 import "./addProduct.scss";
-import PhotoViewer from "photoviewer";
+// import PhotoViewer from "photoviewer";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/scss/image-gallery.scss";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../../redux/product/productController";
 
-import Loader from "react-js-loader";
+
+import { spiral } from "ldrs";
 
 function AddProduct() {
+  spiral.register()
   const [imagePreview, setImagesPreview] = useState([]);
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
@@ -46,8 +48,8 @@ function AddProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const discountAmmount = (price * discount) / 100;
-    const actualPrice = price - discountAmmount;
+    const discountAmount = Math.round((price * discount) / 100);
+    const actualPrice = price - discountAmount;
     console.log(actualPrice);
     const myForm = new FormData();
 
@@ -126,6 +128,7 @@ function AddProduct() {
               Select a Category
             </option>
             <option value="electronics">Electronics</option>
+            <option value="books">Vegitabels</option>
             <option value="grocery">Grocery</option>
             <option value="fashion">Fashion</option>
             <option value="home">Home</option>
@@ -141,10 +144,11 @@ function AddProduct() {
           />
 
           <button type="submit" onClick={handleSubmit}>
+          Add Product 
             {
               status.addProduct === 'pending'? 
-              <Loader type={"spinner-circle"} bgColor={'white'}  color={"green"} size={40} />:
-              <>Add Product <IoCloudUploadSharp /></>
+              <l-spiral size="40" speed="0.9" color="white"></l-spiral>:
+              <><IoCloudUploadSharp /></>
             }
           </button>
         </form>

@@ -32,7 +32,7 @@ export const productSlice = createSlice({
     extraReducers:(builder)=>{
 
         builder.addCase(addProduct.pending , (state , action)=>{
-            state.status.addProduct="panding"
+            state.status.addProduct="pending"
             state.messege=""
         })
         builder.addCase(addProduct.fulfilled , (state , action)=>{

@@ -9,16 +9,24 @@ import {useSelector } from 'react-redux'
 
 import Loader from 'react-js-loader'
 import { productStatusclean } from "../../redux/product/productSlice";
+import { spiral } from "ldrs";
 
 function Product() {
+  spiral.register()
+  const [loading , setLoading] = useState(false)
   const { product , status} =  useSelector((state)=> state.product)
   const [products , setProducts] = useState([])
  const  navigator = useNavigate() 
+
   useEffect(()=>{
+    
     if(status.allProduct === 'pending'){
-      <Loader type={"spinner-circle"} bgColor={'white'}  color={"green"} size={40} />
-      
+      setLoading(true)
     }
+    else{
+      setLoading(false)
+    }
+
     if(status.allProduct === 'success'){
       setProducts(product)
     }
@@ -33,7 +41,7 @@ console.log(products);
       <div className="banner_container">
         <div className="contant_container">
           <p className="heading">On This Way</p>
-          <h3> Grocery store with different treasures</h3>
+          <h3> Cloude Store with different thinks</h3>
           <p className="extra_information">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, ut!
           </p>
@@ -57,7 +65,10 @@ console.log(products);
         <p> <FaCartShopping/></p>
         </div>
       </div>
-
+     {
+       loading?
+       <div className=" flex justify-center items-center ">  <l-spiral size="40" speed="0.9" color="green"></l-spiral> </div>
+        :
       <div className="product_container"> 
       {
         products?.map((ele , index)=>{
@@ -81,6 +92,7 @@ console.log(products);
         
          
       </div>
+     }
     </div>
   );
 }

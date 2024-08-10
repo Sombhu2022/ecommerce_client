@@ -78,18 +78,17 @@
             color: var(--darkGray2);
         }
     }
-    >.category {
-        >span{
+    >div .category {
+        
 
             background: var(--linearColor);
             // display: block;
             padding: 5px 12px;
             border-radius: 5px;
-            width: auto;
             font-weight: 600;
             
             
-        }
+        
     }
     >.description{
         border-top: solid 2px var(--darkGray);

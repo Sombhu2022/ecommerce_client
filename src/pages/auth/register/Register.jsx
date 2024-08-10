@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./register.scss";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +6,11 @@ import { createUser } from "../../../redux/user/userController";
 import moment from 'moment'
 import { Link, useNavigate } from "react-router-dom";
 
+import { spiral } from "ldrs";
+
 function Register() {
+  spiral.register()
+  const [isLoading , setIsLoading] = useState(false)
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -40,14 +44,13 @@ function Register() {
     data.set("password", password);
 
     dispatch(createUser(data));
-  //   const user = await axios.post("http://localhost:8080/user/register" , data ,{
-  //   	headers:{
-  //   		"Content-Type":"multipart/form-data"
-  //   	},
-  //   	withCredentials:true
-  //   })
-  //   console.log(user);
+ 
   };
+
+  useEffect(()=>{
+    if(state.status.regUser === 'pending') setIsLoading(true)
+      
+  },[state.status.regUser])
 
   return (
     <div className="register_page">
@@ -88,11 +91,16 @@ function Register() {
           placeholder="Enter Confirm Password"
           onChange={(e) => setCPassword(e.target.value)}
         />
-        <button>Submit</button>
+         <button> {!isLoading ? (
+          "Submit"
+        ) : (
+          <l-spiral size="40" speed="0.9" color="white"></l-spiral>
+        )}</button>
+        <br></br>
        <br/> <h4 className="pl-3 text-gray-600">if you are alrady register then  
         <Link to={'/login'} className="text-blue-600 ml-3">Log in</Link> </h4>
       </form>
-      {state.status ==="pending" ? <div>loading</div> : ""}
+      
       {
         state.user.createAt ? ( navigate('/')):""
       }
