@@ -8,7 +8,7 @@ function Payment() {
   return (
     <div>
       <h1 className='p-3 text-center text-xl text-gray-600 '>Payment Details</h1>     
-
+      
     </div>
   )
 }

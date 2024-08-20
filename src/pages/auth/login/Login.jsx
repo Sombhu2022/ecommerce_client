@@ -1,66 +1,68 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./login.scss";
-
 import { useDispatch, useSelector } from "react-redux";
 import { logInUser } from "../../../redux/user/userController";
 import { Link, useNavigate } from "react-router-dom";
-
 import { spiral } from "ldrs";
+import "./login.scss"; // Assuming this file contains your custom styles
 
 function Login() {
   spiral.register();
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const { user, status } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const submitHandle = async (e) => {
     e.preventDefault();
     dispatch(logInUser({ email, password }));
   };
-  const navigate = useNavigate();
-  console.log("redux data", user);
+
   useEffect(() => {
     if (status.loginUser === "success") navigate("/");
     if (status.loginUser === "pending") setLoading(true);
   }, [user, status.loginUser]);
 
   return (
-    <div className="login-page">
-      <form action="" className="form" onSubmit={submitHandle}>
-        <h2 className="text-gray-600 text-2xl text-center">Login Page</h2>
-        <input
-          type="email"
-          name="email"
-          id=""
-          placeholder="Enter your Emil"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          id=""
-          placeholder="Enter Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-       <button> {!loading ? (
-          "Submit"
-        ) : (
-          <l-spiral size="40" speed="0.9" color="white"></l-spiral>
-        )}</button>
-        <br></br>
-        <h4 className="text-gray-600 ml-4">
-          {" "}
-          if you are not register
-          <Link to="/register" className="ml-4 text-blue-600">
-            Register now
-          </Link>
-        </h4>
-        <Link to={"/auth/forgate-password"} className="ml-4 text-blue-600">
-          forgate password
+    <div className="flex justify-center items-center min-h-screen bg-gray-300">
+      <form className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full" onSubmit={submitHandle}>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login</h2>
+
+        <div className="mb-4">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your Email"
+            onChange={(e) => setEmail(e.target.value)}
+            className="input-field"
+          />
+        </div>
+
+        <div className="mb-4">
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="custom-button"
+        >
+          {!loading ? "Submit" : <l-spiral size="40" speed="0.9" color="white"></l-spiral>}
+        </button>
+
+        <p className="text-gray-600 mt-6 text-center">
+          Don't have an account?
+          <Link to="/register" className="text-pink-600 ml-2">Register now</Link>
+        </p>
+        <Link to="/auth/forgate-password" className="block text-center text-blue-600 mt-4">
+          Forgot password
         </Link>
       </form>
     </div>
