@@ -10,13 +10,17 @@ import {useSelector } from 'react-redux'
 import Loader from 'react-js-loader'
 import { productStatusclean } from "../../redux/product/productSlice";
 import { spiral } from "ldrs";
+import FilterSection from "./components/filterSection/FilterSection";
+import axios from "axios";
+import { baseUrl } from "../../App";
+import API from "../../utils/axiosSetup";
 
 function Product() {
   spiral.register()
   const [loading , setLoading] = useState(false)
   const { product , status} =  useSelector((state)=> state.product)
   const [products , setProducts] = useState([])
- const  navigator = useNavigate() 
+  const  navigator = useNavigate() 
 
   useEffect(()=>{
     
@@ -35,6 +39,18 @@ function Product() {
     }
   },[ product , status.allProduct ])
 console.log(products);
+
+
+ const handleFilter =async(catagory )=>{
+     console.log(catagory);
+     const {data} = await API.get(`${baseUrl}/product/category/${catagory}`)
+     if(data?.product?.length > 0){
+      setProducts(data.product)
+     }
+     
+ }
+  
+
   return (
     <div className="product_page">
       
@@ -57,6 +73,8 @@ console.log(products);
      <div>
 
      </div>
+      
+      <FilterSection onSelect={handleFilter}/>
 
       <div className="total_info">
         <p> Showing all {products.length} Result </p>
@@ -65,6 +83,9 @@ console.log(products);
         <p> <FaCartShopping/></p>
         </div>
       </div>
+
+
+
      {
        loading?
        <div className=" flex justify-center items-center ">  <l-spiral size="40" speed="0.9" color="green"></l-spiral> </div>

@@ -18,13 +18,14 @@ function Login() {
   const submitHandle = async (e) => {
     e.preventDefault();
     dispatch(logInUser({ email, password }));
+    
   };
 
   useEffect(() => {
-    if (status.loginUser === "success") navigate("/");
     if (status.loginUser === "pending") setLoading(true);
   }, [user, status.loginUser]);
-
+  
+  if (status.loginUser === "success") navigate("/");
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-300">
       <form className="bg-white rounded-lg shadow-lg p-8 max-w-lg w-full" onSubmit={submitHandle}>
