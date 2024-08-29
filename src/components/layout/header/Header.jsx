@@ -56,7 +56,8 @@ const Header = () => {
                 Log out 
               </button>
             ) : (
-              <button className="btn login-logout-button" onClick={()=>navigate('/login')}>
+              <button className="btn login-logout-button" onClick={()=>{console.log("log in component");
+               navigate('/login')}}>
                 Login 
               </button>
             )}

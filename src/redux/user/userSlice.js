@@ -122,6 +122,7 @@ export const userSlice = createSlice({
         builder.addCase(logoutUser.fulfilled ,(state , action)=>{
             //  state.error = action.payload
             state.status.logoutUser ="success";
+            state.status.loginUser = ''
             state.message = action.payload.message 
             state.isAuthenticate = false;
             state.user = {}
@@ -132,6 +133,7 @@ export const userSlice = createSlice({
         builder.addCase(logoutUser.rejected , (state , action)=>{
             state.error=action.error.message
             state.status.logoutUser ="rejected"
+            state.status.loginUser = ''
             state.isAuthenticate=false
             state.message = action.error.message
         })
