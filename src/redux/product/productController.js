@@ -73,3 +73,24 @@ export const deleteProduct = createAsyncThunk('product/deleteProduct' , async({i
     console.log(data);
  return data
 })
+
+
+export const filterProductByCategory = createAsyncThunk('product/filterProductByCategory' , async(category)=>{
+
+    const {data} = await API.get(`${baseUrl}/product/category/${category}`,{
+        headers: { "Content-Type": "multipart/form-data", },
+        withCredentials: true
+    },)
+    console.log('product categogy' , data);
+    return data
+} )
+
+export const searchProductByName = createAsyncThunk('/product/searchProductByName', async({name})=>{
+     const {data} = await API.get(`${baseUrl}/product/name/${name}`,{
+        headers: { "Content-Type": "multipart/form-data", },
+        withCredentials: true
+    },)
+    console.log(data);
+    return data
+    
+})

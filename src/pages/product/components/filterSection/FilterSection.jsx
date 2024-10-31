@@ -7,9 +7,11 @@ import home from './home.jpg'
 import books from './books.webp'
 import others from './others.avif'
 import veg from './vegetables.webp'
+import all from './all.webp'
 
 function FilterSection({onSelect}) {
   const filterData = [
+    {category:'All Category' , imagePath: all},
     { category: "Electronics", imagePath:electronics },
     { category: "Grocery", imagePath: grocery},
     { category: "Fashion", imagePath: fashion },

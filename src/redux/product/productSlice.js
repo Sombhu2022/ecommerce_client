@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addProduct, addReview, allProduct, deleteProduct, selectProduct, updateProduct } from "./productController";
+import { addProduct, addReview, allProduct, deleteProduct, filterProductByCategory, searchProductByName, selectProduct, updateProduct } from "./productController";
 
 const initialState = {
     product:[],
@@ -10,7 +10,9 @@ const initialState = {
         deleteProduct:"",
         reviewProduct:"",
         allProduct:"",
-        selectProduct:""
+        selectProduct:"",
+        filterProduct:"",
+        searchProduct:""
     },
 
     messege:"",
@@ -26,6 +28,8 @@ export const productSlice = createSlice({
             state.status.addProduct = ''
             state.status.deleteProduct = ''
             state.status.reviewProduct = ''
+            state.status.filterProduct =''
+            state.status.searchProduct=''
 
         }
     },
@@ -112,6 +116,35 @@ export const productSlice = createSlice({
         })
         builder.addCase(deleteProduct.rejected , (state , action)=>{
             state.status.deleteProduct ="rejected"
+            state.messege=action.error.message
+        })
+
+        builder.addCase(filterProductByCategory.pending , (state , action)=>{
+            state.status.filterProduct ="panding"
+            state.messege=""
+        })
+        builder.addCase(filterProductByCategory.fulfilled , (state , action)=>{
+            state.product = action.payload.product
+            state.status.filterProduct ="success"
+            state.messege=""
+        })
+        builder.addCase(filterProductByCategory.rejected , (state , action)=>{
+            state.status.filterProduct ="rejected"
+            state.messege=action.error.message
+        })
+        
+
+        builder.addCase(searchProductByName.pending , (state , action)=>{
+            state.status.searchProduct ="panding"
+            state.messege=""
+        })
+        builder.addCase(searchProductByName.fulfilled , (state , action)=>{
+            state.product = action.payload.product
+            state.status.searchProduct ="success"
+            state.messege=""
+        })
+        builder.addCase(searchProductByName.rejected , (state , action)=>{
+            state.status.searchProduct ="rejected"
             state.messege=action.error.message
         })
 
