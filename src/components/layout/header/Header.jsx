@@ -19,8 +19,8 @@ import { MdOutlineClose } from "react-icons/md";
 const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [isAdmin , setIsAdmin] = useState(false)
- 
   const [menuOpen, setMenuOpen] = useState(false);
+ 
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -49,6 +49,7 @@ const Header = () => {
   return (
     <header className="p-3 w-full flex justify-between lg:pl-20 lg:pr-20 md:pl-3 md:pr-3  bg-[#083b3b0f] border  border-[#8090c038] ">
     <div className="text-3xl font-serif"> Apna Bazar </div>
+   
     <nav className="flex items-center justify-center gap-2">
       
     {isLogin ? (
