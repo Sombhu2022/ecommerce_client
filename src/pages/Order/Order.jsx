@@ -99,6 +99,10 @@ console.log( productList);
           withCredentials: true
       })
       // console.log(data.order.id , data.key , data.order , data?.data?._id)
+      console.log(data);
+
+      const token = localStorage.getItem('token') 
+      
 
       if(paymentType === 'online'){
 
@@ -110,10 +114,11 @@ console.log( productList);
           description: "Build your healthy Life",
           image: "https://www.pngall.com/wp-content/uploads/8/Market-PNG-Image.png",
           order_id: data.order.id,
-          callback_url:`${baseUrl}/order/pay/${data?.data?._id}`,
+          callback_url:`${baseUrl}/order/pay/${data?.data?._id}?token=${token}`,
+          
           prefill: {
-              name: user.name,
-              email: user.email,
+              name: data.name,
+              email: data.email,
               contact: "7047808326"
           },
           notes: {
