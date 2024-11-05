@@ -7,6 +7,7 @@ import './order.scss'
 
 import { MdMyLocation } from "react-icons/md";
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Order() {
   const [coordinets , setCoordinets] = useState([])
@@ -31,20 +32,25 @@ function Order() {
   const { product , status } = useSelector((state)=>state.cart)
   const { user } = useSelector((state)=>state.user)
 
-console.log(paymentType);
-console.log(productList);
-console.log(user);
+  const  navigate = useNavigate() 
+
+// console.log(paymentType);
+// console.log(productList);
+// console.log(user);
+
 
   useEffect(()=>{  
     setProductList(product.cart)
     setTotalAmmount(product.totalAmmount)
     if(product.totalAmmount < 500){
-      setDelivaryFees(50)
+      setDelivaryFees(49)
+      setTotalAmmount((prev)=>prev+49)
     }
-  } , [])
+  } , [product])
   
+  console.log("delivary fees" ,delivaryFees , totalAmmount);
   
-console.log( productList);
+
 
   const getCurrentLocation =async (e)=>{
      e.preventDefault();
@@ -81,6 +87,7 @@ console.log( productList);
     e.preventDefault();
     
     try {
+      setIsLoading(true)
     const formData = {
       email,
       phone,
@@ -90,7 +97,7 @@ console.log( productList);
       district,
       products:product._id,
       totalAmmount,
-      delivaryFees,
+      deliveryCharge:delivaryFees,
       paymentType
     }
 
@@ -134,6 +141,11 @@ console.log( productList);
 
       } catch (error) {
         console.log(error);
+      }finally{
+        setIsLoading(false)
+        if(paymentType === 'offline'){
+            navigate('/profile')
+        }
       }
 
      
@@ -189,6 +201,7 @@ console.log( productList);
             placeholder=' City Name'
             value={city}
             onChange={(e)=>setCity(e.target.value)}
+             className="input-field"
           />
             <input
             type="text"
@@ -197,6 +210,7 @@ console.log( productList);
             placeholder=' State Name'
             value={state}
             onChange={(e)=>setState(e.target.value)}
+            className="input-field"
           />
           </div>
 
@@ -236,8 +250,9 @@ console.log( productList);
 
           <button type="submit"
             onClick={handleSubmit}
+            disabled={isLoading}
            >
-           Add Location
+           {isLoading? 'loading...':'Add Location'}
           </button>
         {/* <div className='current_location'>
 
@@ -250,6 +265,7 @@ console.log( productList);
      {/* <button className='button' onClick={()=>setIsAddLoc(!isAddLoc)}> { isAddLoc? "Hide Form":"Add Location"} </button> */}
   
     </div>
+
   )
 }
 

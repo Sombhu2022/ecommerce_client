@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import './profile.scss'
+import MyOrder from './components/MyOrder'
 
 function Profile() {
     const { user , isAuthenticate} = useSelector((state)=> state.user)
@@ -10,6 +11,7 @@ function Profile() {
     console.log(user);
 
   return (
+    <>
     <div className='profile-container'>
         <img src={user?.dp?.url} alt="" />
         <div className='user-info'>
@@ -25,6 +27,9 @@ function Profile() {
         </div>
 
     </div>
+
+    <MyOrder/>
+    </>
   )
 }
 
