@@ -6,6 +6,8 @@ import API from '../../utils/axiosSetup'
 import { baseUrl } from '../../App'
 import { useParams } from 'react-router-dom'
 import PaymentReceiptPDF from './PaymentReceiptPDF'
+import PaymentReceipt from './PaymentRecipt'
+
 
 interface PaymentData {
   address: {
@@ -64,9 +66,12 @@ export default function Payment() {
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Payment Receipt</h1>
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="p-6">
-          <PDFViewer className="w-full h-[600px] mb-6 text-black bg-gray-200">
+          {/* <PDFViewer className="w-full h-[600px] mb-6 text-black bg-gray-200">
             <PaymentReceiptPDF data={paymentData} />
-          </PDFViewer>
+          </PDFViewer> */}
+          <div className=''>
+              <PaymentReceipt data={paymentData} />
+          </div>
           <div className="flex justify-center">
             <PDFDownloadLink
               document={<PaymentReceiptPDF data={paymentData} />}

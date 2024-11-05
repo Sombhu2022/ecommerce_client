@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const PaymentReceiptPDF = ({ data = {} }) => {
+export const PaymentReceiptPDF = ({ data = {} , topic="Payment Receipt"}) => {
   const [orderDetails, setOrderDetails] = useState({});
 
   useEffect(() => {
@@ -122,11 +122,15 @@ export const PaymentReceiptPDF = ({ data = {} }) => {
     orderdate = date.toLocaleString() || 'N/A';
   }
 
+  let deliveryStatusColor = 'text-yellow-500'
+  if(deliveryStatus === 'success') deliveryStatusColor = 'text-green-600'
+  else if(deliveryStatus === 'rejected') deliveryStatusColor = 'text-red-600'
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.title}>Payment Receipt</Text>
+          <Text style={styles.title}>{topic}</Text>
           <Text style={styles.subtitle}>Customer Information</Text>
           <Text style={styles.text}>Email: <Text style={styles.highlightText}>{email}</Text></Text>
           <Text style={styles.text}>Phone: <Text style={styles.highlightText}>{phone}</Text></Text>
@@ -141,7 +145,7 @@ export const PaymentReceiptPDF = ({ data = {} }) => {
           <Text style={styles.text}>Payment ID: {razorpay_payment_id}</Text>
           <Text style={styles.text}>Payment Type: {paymentType}</Text>
           <Text style={styles.text}>Payment Status: {paymentStatus}</Text>
-          <Text style={styles.text}>Delivery Status: {deliveryStatus}</Text>
+          <Text style={styles.text} >Delivery Status: <Text>{deliveryStatus}</Text></Text>
           <Text style={styles.text}>Date: {orderdate}</Text>
         </View>
 

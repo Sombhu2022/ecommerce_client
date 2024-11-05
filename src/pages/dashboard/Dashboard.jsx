@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './dashboard.scss'
 import UpdateProduct from './components/UpdateProduct'
+import DeliveryUpdate from './components/DeliveryUpdate'
 
 function Dashboard() {
   
@@ -12,6 +13,7 @@ function Dashboard() {
    useEffect(()=>{
        if(product){
           setProducts(product)
+          
        }
    },[product])
 
@@ -32,6 +34,7 @@ function Dashboard() {
         }
 
       </div>
+        <DeliveryUpdate/>
     </div>
   )
 }

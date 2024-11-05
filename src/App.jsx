@@ -29,6 +29,7 @@ import { resateUserStatus } from "./redux/user/userSlice";
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import OrderDetails from "./pages/auth/profile/components/OrderDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/order" element={<Order />} />
+            <Route path="/order/:orderId" element={<OrderDetails />} />
             <Route path="/success/:id" element={<Payment />} />
             <Route path="/faild" element={<h1>not pay</h1>} />
             {/* <Route path="/payment" element={<Payment />} /> */}
@@ -97,5 +99,7 @@ function App() {
 
 export default App;
 
-//export const baseUrl = "http://localhost:8080";
+
+// export const baseUrl = "http://localhost:8080";
+
 export const baseUrl = "https://som-ecommerce-api.vercel.app";
